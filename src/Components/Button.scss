@@ -1,0 +1,29 @@
+.button {
+	background-color: #ffffff;
+	color: #fff;
+	border: none;
+	padding: 1rem 2rem;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: bold;
+	transition: background-color 0.3s;
+}
+
+.danger {
+	background-color: #f00;
+}
+
+.success {
+	background-color: #0f0;
+	color: black;
+}
+
+.warning {
+	background-color: #ff0;
+	color: #676767;
+}
+
+.failed {
+	background-color: #606060;
+}
