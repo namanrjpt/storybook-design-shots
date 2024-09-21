@@ -1,0 +1,101 @@
+.card {
+	min-height: 25vh;
+	min-width: 25%;
+	background-color: white;
+	border-radius: 0.75rem;
+	padding: 1rem 1.25rem;
+
+	> .upperNavigation {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 1px solid #80808036;
+		padding: 1rem 0;
+	}
+
+	> .fileInfo {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.5rem 0rem;
+
+		> p {
+			color: #555555;
+			font-size: 0.85rem;
+			font-weight: 500;
+			margin: 0 0 0 0.75rem;
+		}
+	}
+
+	> .inputWrapper {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		gap: 0.15rem;
+		padding: 0.5rem 0;
+		border-radius: 0.75rem;
+		border: 2px solid transparent;
+
+		> svg {
+			color: #555555;
+			font-size: 1.5rem;
+			margin: 0 0 0 1.6rem;
+
+			&:nth-of-type(2) {
+				color: #383838;
+				padding: 0.15rem;
+				aspect-ratio: 1;
+				margin-right: 0.5rem;
+				width: 2rem;
+				border-radius: 5rem;
+				transition: all 0.15s ease-in-out;
+
+				&:hover {
+					cursor: pointer;
+					background-color: #1582da;
+					color: white;
+				}
+			}
+		}
+
+		> input {
+			color: #363636;
+			font-size: 1rem;
+			font-weight: 400;
+			margin: 0 0 0 0.35rem;
+			width: 100%;
+
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+
+	> .border {
+		border: 2px solid #2ba0ff;
+	}
+
+	> .grabberDiv {
+		display: none;
+		position: absolute;
+		padding: 0.25rem 1rem;
+		background-color: rgb(51, 99, 255);
+		pointer-events: none;
+		align-items: center;
+		justify-content: center;
+		gap: 0.65rem;
+		border-radius: 10rem;
+		cursor: grab;
+
+		> svg {
+			color: white;
+			font-size: 1.25rem;
+		}
+
+		> p {
+			font-size: 1.15rem;
+			color: white;
+		}
+	}
+}

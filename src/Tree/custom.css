@@ -1,0 +1,28 @@
+.ant-tree-draggable-icon {
+	display: none !important;
+	visibility: hidden !important;
+}
+
+.ant-tree.ant-tree-block-node
+	.ant-tree-list-holder-inner
+	.ant-tree-treenode.dragging:after {
+	border: none !important;
+	box-shadow: none !important;
+}
+
+.ant-tree-node-content-wrapper {
+	user-select: none;
+}
+
+.ant-tree-node-content-wrapper
+	.ant-tree-node-selected {
+	background-color: #7888ad;
+}
+
+.ant-tree
+	.ant-tree-switcher
+	.ant-tree-switcher-icon
+	svg {
+	color: #5f5f5f;
+	font-size: 1.05rem;
+}

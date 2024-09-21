@@ -1,0 +1,145 @@
+* {
+	user-select: none;
+	--shadow: #00000025;
+	--border: #00000013;
+}
+
+.parentButton {
+	width: fit-content;
+	display: block;
+	position: relative;
+
+	.button {
+		width: fit-content;
+		padding: 0.5rem 1.75rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background-color: white;
+		gap: 0.5rem;
+		border-radius: 10rem;
+		-webkit-box-shadow: 0px 12px 20px 1px
+			var(--shadow);
+		-moz-box-shadow: 0px 12px 20px 1px var(--shadow);
+		box-shadow: 0px 2px 1px 1px var(--shadow);
+		border-top: 1px solid var(--border);
+		transition: all 0.2s ease-in-out;
+
+		> svg {
+			font-size: 1.25rem;
+			color: black;
+		}
+
+		> p {
+			font-size: 1rem;
+			color: black;
+		}
+
+		@keyframes rotate {
+			from {
+				transform: rotate(0deg);
+			}
+			to {
+				transform: rotate(360deg);
+			}
+		}
+
+		&:hover {
+			cursor: pointer;
+			border-top: 1px solid transparent;
+			background-color: #00000012;
+			box-shadow: none;
+
+			> svg {
+				animation: rotate 0.75s ease-in-out;
+				animation-play-state: running;
+				animation-direction: normal;
+			}
+		}
+	}
+
+	> .buttonHovered {
+		cursor: pointer;
+		border-top: 1px solid transparent;
+		background-color: #00000012;
+		box-shadow: none;
+
+		> svg {
+			animation: rotate 0.75s ease-in-out;
+			animation-play-state: running;
+			animation-direction: normal;
+		}
+	}
+
+	> .buttonActive {
+		background-color: #00000012;
+		border-top: 1px solid transparent;
+		box-shadow: none;
+	}
+
+	> .menu {
+		position: absolute;
+		background-color: white;
+		border: 1px solid var(--border);
+		padding: 0.5rem;
+		width: 15rem;
+		min-height: 10rem;
+		border-radius: 10px;
+		top: 100%;
+		right: 17px;
+		transform: translate(8.5rem, 0);
+		margin: 0.5rem 0 0 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		visibility: hidden;
+		z-index: 10;
+
+		> .item {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			padding: 0.65rem 1rem;
+			gap: 0.5rem;
+			transition: all 0.25s ease-in-out;
+			transform: translateY(-20);
+			opacity: 0;
+
+			&:nth-of-type(1) {
+				transform: translateY(0);
+				opacity: 0;
+			}
+
+			&:hover {
+				cursor: pointer;
+				background-color: #f0f0f0;
+			}
+
+			&:nth-of-type(1) {
+				padding: 0.5rem 1rem;
+			}
+
+			> svg {
+				font-size: 1.5rem;
+				color: black;
+				fill: black;
+			}
+
+			> p {
+				font-size: 1rem;
+				color: black;
+			}
+		}
+
+		> span {
+			display: block;
+			width: 100%;
+			height: 1px;
+			background-color: #0000002c;
+			margin: 0.5rem 0;
+			transform: translateY(0);
+			opacity: 0;
+		}
+	}
+}
