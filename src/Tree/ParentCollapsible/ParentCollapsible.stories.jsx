@@ -103,7 +103,9 @@ export default {
 };
 
 const Template = (args) => (
-	<ParentCollapse {...args} />
+	<div class='h-screen w-full flex justify-center items-center bg-[#D4DAE3]'>
+		<ParentCollapse {...args} />
+	</div>
 );
 
 export const Default = Template.bind({});

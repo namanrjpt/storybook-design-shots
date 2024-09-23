@@ -213,10 +213,10 @@ const Card = () => {
 		}
 	};
 
-	const getMovingMouse = (data) => {
+	const getMovingMouse = ({ x, y }) => {
 		setGrabberPosition({
-			x: data.x,
-			y: data.y,
+			x: x,
+			y: y,
 		});
 	};
 
@@ -451,6 +451,7 @@ const Card = () => {
 	};
 
 	const handleItemDrag = (event) => {
+		console.log(event);
 		// Set the drag image
 		const img = new Image();
 		img.src =
@@ -487,6 +488,91 @@ const Card = () => {
 		});
 	};
 
+	// useEffect(() => {
+	// 	if (highlighted) {
+	// 		highlighted.classList.add(styles.dragOver);
+	// 	}
+	// 	console.log(highlighted);
+	// 	// return () => {
+	// 	// 	if (highlighted) {
+	// 	// 		highlighted.classList.remove(styles.dragOver);
+	// 	// 		highlighted.dataset.dragInside = 'false';
+	// 	// 	}
+	// 	// };
+	// }, [highlighted]);
+
+	// const handleDragEnter = (event) => {
+	// 	if (event.node?.type == 'folder') {
+
+	// 	}
+	// 	const parent = getParentNode(
+	// 		gData,
+	// 		event.node.key
+	// 	);
+	// 	console.log(parent);
+	// 	const innerDiv = document.querySelector(
+	// 		'div[data-key="' + event.node.key + '"]'
+	// 	);
+
+	// 	// Use closest() to find the outermost parent with the specific class
+	// 	const outerDiv = innerDiv.closest(
+	// 		'.ant-tree-treenode-draggable'
+	// 	);
+	// 	console.log(outerDiv);
+	// 	setHighlighted(outerDiv);
+
+	// 	// if (parent) {
+	// 	// 	const parentElement = document.querySelector(
+	// 	// 		`[data-key="${parent.key}"]`
+	// 	// 	);
+	// 	// 	// console.log(parentElement);
+	// 	// 	if (parentElement) {
+	// 	// 		setHighlighted(parentElement);
+	// 	// 	}
+	// 	// }
+	// };
+
+	const handleDragOver = (event) => {
+		getMovingMouse({
+			x: event.event.clientX,
+			y: event.event.clientY,
+		});
+	};
+
+	// const handleDragLeave = (event) => {
+	// 	if (highlighted) {
+	// 		highlighted.classList.remove(styles.dragOver);
+	// 		highlighted.dataset.dragInside = 'false';
+	// 	}
+	// 	setHighlighted(null);
+	// };
+
+	const getParentNode = (treeData, key) => {
+		let parentNode = null;
+		let parentCount = 0;
+
+		const traverse = (nodes, parent) => {
+			for (let node of nodes) {
+				if (node.key === key) {
+					if (parentNode === null) {
+						parentNode = parent;
+					} else {
+						parentCount++;
+					}
+				}
+				if (node.children) {
+					traverse(node.children, node);
+				}
+			}
+		};
+
+		traverse(treeData, null);
+		if (parentCount > 1) {
+			return null;
+		}
+		return parentNode;
+	};
+
 	return (
 		<div className='bg-[#D4DAE3] h-screen w-full flex items-center justify-center'>
 			<div className={styles.card}>
@@ -511,9 +597,11 @@ const Card = () => {
 					onDrop={onDrop}
 					expandedKeys={expandedKeys}
 					onExpand={onExpand}
-					onDragStart={handleItemDrag}
+					// onDragEnter={handleDragEnter}
+					onDragOver={handleDragOver}
 					onDragEnd={handleDragEnd}
-					getMovingMouse={getMovingMouse}
+					// onDragLeave={handleDragLeave}
+					onDragStart={handleItemDrag}
 				/>
 
 				<div

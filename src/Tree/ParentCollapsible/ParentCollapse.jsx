@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tree } from 'antd';
 import styles from './ParentCollapsible.module.scss';
+import '../custom.css';
 
 const ParentCollapsible = ({
 	data,
@@ -11,12 +12,13 @@ const ParentCollapsible = ({
 	onExpand,
 	onDragStart,
 	onDragEnd,
-	getMovingMouse,
-	isCollapsed,
+	// getMovingMouse,
+	// isCollapsed,
+	onDragOver,
+	onDragLeave,
 }) => {
 	return (
 		<Tree
-			className='draggable-tree'
 			defaultExpandedKeys={expandedKeys}
 			draggable
 			blockNode
@@ -26,15 +28,14 @@ const ParentCollapsible = ({
 			onExpand={onExpand}
 			treeData={data}
 			onDragEnd={onDragEnd}
-			onDragOver={(event) => {
-				getMovingMouse({
-					x: event.event.clientX,
-					y: event.event.clientY,
-				});
-			}}
+			onDragLeave={onDragLeave}
+			onDragOver={onDragOver}
 			onDragStart={onDragStart}
 			titleRender={(nodeData) => (
-				<div className={styles.parentItem}>
+				<div
+					className={styles.parentItem}
+					data-key={nodeData.key}
+				>
 					{nodeData.icon && (
 						<span className={styles.icon}>
 							{nodeData.icon}
