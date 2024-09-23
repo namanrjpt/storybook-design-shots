@@ -3,14 +3,15 @@
 	min-width: 25%;
 	background-color: white;
 	border-radius: 0.75rem;
-	padding: 1rem 1.25rem;
+	padding: 1rem 2rem;
 
 	> .upperNavigation {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		border-bottom: 1px solid #80808036;
-		padding: 1rem 0;
+		padding: 1rem 2rem;
+		margin: 0 -2rem;
 	}
 
 	> .fileInfo {
@@ -20,7 +21,7 @@
 		padding: 0.5rem 0rem;
 
 		> p {
-			color: #555555;
+			color: #989898;
 			font-size: 0.85rem;
 			font-weight: 500;
 			margin: 0 0 0 0.75rem;
@@ -53,8 +54,8 @@
 
 				&:hover {
 					cursor: pointer;
-					background-color: #1582da;
-					color: white;
+					background-color: #555555;
+					color: #ffffff;
 				}
 			}
 		}

@@ -32,66 +32,80 @@ const Button = ({
 	};
 
 	useEffect(() => {
+		document.addEventListener(
+			'keydown',
+			(event) => {
+				if (event.key === 'Escape') {
+					setShowMenu(false);
+				}
+			}
+		);
+
+		return () => {
+			document.removeEventListener(
+				'keydown',
+				(event) => {
+					if (event.key === 'Escape') {
+						setShowMenu(false);
+					}
+				}
+			);
+		};
+	}, []);
+
+	useEffect(() => {
 		setProps((prevProps) => ({
 			...prevProps,
 			isHovered: isHovered ?? false,
 		}));
 	}, [isHovered]);
 
-	useGSAP(() => {
-		if (showMenu) {
-			gsap.fromTo(
-				menuRef.current,
-				{
-					visibility: 'visible',
-					opacity: 0,
-					y: -50,
-					scaleY: 0,
-					transformOrigin: 'top',
-				},
-				{
-					opacity: 1,
-					y: 0,
-					scaleY: 1,
-					ease: 'expo.out',
-					duration: 0.2,
-					onComplete: () => {
-						const items = gsap.utils.toArray(
-							menuRef.current.children
-						);
-						gsap.fromTo(
-							items,
-							{ opacity: 0, y: -20 },
-							{
-								opacity: 1,
-								y: 0,
-								duration: 0,
-							}
-						);
-					},
-				}
-			);
-		} else {
-			const items = gsap.utils.toArray(
-				menuRef.current.children
-			);
-			gsap.to(items, {
-				opacity: 0,
-				y: -20,
-				duration: 0.15,
-				onComplete: () => {
-					gsap.to(menuRef.current, {
+	useGSAP(
+		() => {
+			if (showMenu) {
+				gsap.fromTo(
+					menuRef.current,
+					{
+						visibility: 'visible',
 						opacity: 0,
 						y: -50,
 						scaleY: 0,
 						transformOrigin: 'top',
-						ease: 'expo.in',
+					},
+					{
+						opacity: 1,
+						y: 0,
+						scaleY: 1,
+						ease: 'expo.out',
 						duration: 0.2,
-					});
-				},
-			});
-		}
-	}, [showMenu]);
+					}
+				);
+				gsap.to(menuRef.current.children, {
+					opacity: 1,
+					y: 0,
+					duration: 0,
+				});
+			} else {
+				const items = gsap.utils.toArray(
+					menuRef.current.children
+				);
+				gsap.to(items, {
+					opacity: 0,
+					y: -20,
+					duration: 0.15,
+				});
+				gsap.to(menuRef.current, {
+					opacity: 0,
+					y: -50,
+					scaleY: 0,
+					transformOrigin: 'top',
+					ease: 'expo.in',
+					duration: 0.2,
+				});
+			}
+		},
+		{ dependencies: [showMenu] }
+	);
 
 	return (
 		<div className={styles.parentButton}>

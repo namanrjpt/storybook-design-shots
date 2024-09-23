@@ -285,6 +285,56 @@ const Card = () => {
 				text: text,
 			});
 
+			// Item Delete & Enter Event Listener
+			useEffect(() => {
+				document.addEventListener('keydown', (e) => {
+					if (
+						e.key === 'Escape' ||
+						e.key === 'Delete'
+					) {
+						setItemData({
+							type: '',
+							icon: '',
+							text: '',
+						});
+						setIsNewItem(false);
+					}
+					if (e.key === 'Enter') {
+						if (itemData.text != '') {
+							onMount(itemData);
+							container.current.className = `${styles.inputWrapper}`;
+							container.current.blur();
+						}
+					}
+				});
+
+				return () => {
+					document.removeEventListener(
+						'keydown',
+						(e) => {
+							if (
+								e.key === 'Escape' ||
+								e.key === 'Delete'
+							) {
+								setItemData({
+									type: '',
+									icon: '',
+									text: '',
+								});
+								setIsNewItem(false);
+							}
+							if (e.key === 'Enter') {
+								if (itemData.text != '') {
+									onMount(itemData);
+									container.current.className = `${styles.inputWrapper}`;
+									container.current.blur();
+								}
+							}
+						}
+					);
+				};
+			}, [itemData]);
+
 			useEffect(() => {
 				console.log(data);
 				container.current.focus();
@@ -401,7 +451,7 @@ const Card = () => {
 	};
 
 	const handleItemDrag = (event) => {
-		console.log(document.body.style.cursor);
+		// Set the drag image
 		const img = new Image();
 		img.src =
 			'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; // 1x1 transparent pixel

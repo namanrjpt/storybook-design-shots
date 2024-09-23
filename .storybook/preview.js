@@ -2,6 +2,7 @@
 import '../src/globals.css';
 const preview = {
 	parameters: {
+		layout: 'fullscreen',
 		controls: {
 			matchers: {
 				color: /(background|color)$/i,

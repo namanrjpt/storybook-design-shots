@@ -27,3 +27,9 @@
 	font-size: 1.05rem;
 	margin-bottom: 5px;
 }
+
+.ant-tree
+	.ant-tree-switcher
+	.ant-tree-switcher-icon {
+	font-size: 1.05rem;
+}
