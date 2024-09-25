@@ -11,6 +11,12 @@
 	font-family: 'Lato', sans-serif;
 }
 
+svg {
+	> g {
+		fill: #313131;
+	}
+}
+
 body,
 html {
 	background-color: #242424;

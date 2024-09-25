@@ -202,7 +202,7 @@ const Card = () => {
 
 			case 'Action':
 				setNewItem({
-					icon: <PiArrowBendUpRight />,
+					icon: <FcProcess />,
 					type: 'Action',
 					text: 'Action',
 				});

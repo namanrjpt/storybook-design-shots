@@ -6,7 +6,7 @@ import React, {
 import styles from './Button.module.scss';
 import { IoAdd } from 'react-icons/io5';
 import { MdOutlineCreateNewFolder } from 'react-icons/md';
-import { PiArrowBendUpRight } from 'react-icons/pi';
+import { FcProcess } from 'react-icons/fc';
 import { RiLoopRightFill } from 'react-icons/ri';
 import { IoTextOutline } from 'react-icons/io5';
 import { MdOutlineSensors } from 'react-icons/md';
@@ -152,7 +152,7 @@ const Button = ({
 					className={styles.item}
 					onClick={() => handleClickItem('Action')}
 				>
-					<PiArrowBendUpRight />
+					<FcProcess />
 					<p>Action</p>
 				</div>
 				<div

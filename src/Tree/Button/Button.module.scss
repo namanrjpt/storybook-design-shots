@@ -112,8 +112,13 @@
 
 			> svg {
 				font-size: 1.5rem;
-				color: black;
-				fill: black;
+				color: #313131;
+				fill: #313131;
+
+				> g {
+					fill: #313131;
+					color: #313131;
+				}
 			}
 
 			> p {
