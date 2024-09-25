@@ -14,6 +14,7 @@ import { IoTextOutline } from 'react-icons/io5';
 import { MdOutlineSensors } from 'react-icons/md';
 import { MdCheck } from 'react-icons/md';
 import { IoIosFolderOpen } from 'react-icons/io';
+import { FcProcess } from 'react-icons/fc';
 import ParentCollapsible from '../ParentCollapsible/ParentCollapse.jsx';
 import '../custom.css';
 import gsap from 'gsap';
@@ -21,6 +22,7 @@ import { useGSAP } from '@gsap/react';
 
 const Card = () => {
 	const grabber = useRef(null);
+	const borderRef = useRef(null);
 	const [expandedKeys, setExpandedKeys] = useState(
 		[]
 	);
@@ -80,20 +82,23 @@ const Card = () => {
 								{
 									title: 'Action_1',
 									key: '0-2-2-1',
-									icon: <PiArrowBendUpRight />,
+									icon: <FcProcess />,
 									isLeaf: true,
+									isWorking: true,
 								},
 								{
 									title: 'Action_2',
 									key: '0-2-2-2',
-									icon: <RiLoopRightFill />,
+									icon: <FcProcess />,
+									isWorking: true,
 									isLeaf: true,
 								},
 								{
 									title: 'Action_3',
 									key: '0-2-2-3',
-									icon: <IoTextOutline />,
+									icon: <FcProcess />,
 									isLeaf: true,
+									isWorking: true,
 								},
 							],
 						},
@@ -374,6 +379,8 @@ const Card = () => {
 	const onDrop = (info) => {
 		removeDragger();
 		setIsDragging(false);
+		borderRef.current.style.border =
+			'1px solid transparent';
 
 		const dropKey = info.node.key;
 		const dragKey = info.dragNode.key;
@@ -451,7 +458,6 @@ const Card = () => {
 	};
 
 	const handleItemDrag = (event) => {
-		console.log(event);
 		// Set the drag image
 		const img = new Image();
 		img.src =
@@ -479,6 +485,8 @@ const Card = () => {
 	const handleDragEnd = (e) => {
 		setSelectedItem(null);
 		setIsDragging(false);
+		borderRef.current.style.border =
+			'1px solid transparent';
 	};
 
 	const handleMouseMove = (event) => {
@@ -488,49 +496,29 @@ const Card = () => {
 		});
 	};
 
-	// useEffect(() => {
-	// 	if (highlighted) {
-	// 		highlighted.classList.add(styles.dragOver);
-	// 	}
-	// 	console.log(highlighted);
-	// 	// return () => {
-	// 	// 	if (highlighted) {
-	// 	// 		highlighted.classList.remove(styles.dragOver);
-	// 	// 		highlighted.dataset.dragInside = 'false';
-	// 	// 	}
-	// 	// };
-	// }, [highlighted]);
+	const handleDragEnter = (event) => {
+		if (event.node?.type == 'folder') {
+		}
+		const innerDiv = document.querySelector(
+			'div[data-key="' + event.node.key + '"]'
+		);
 
-	// const handleDragEnter = (event) => {
-	// 	if (event.node?.type == 'folder') {
+		const outerDiv = innerDiv.closest(
+			'.ant-tree-treenode-draggable'
+		);
 
-	// 	}
-	// 	const parent = getParentNode(
-	// 		gData,
-	// 		event.node.key
-	// 	);
-	// 	console.log(parent);
-	// 	const innerDiv = document.querySelector(
-	// 		'div[data-key="' + event.node.key + '"]'
-	// 	);
+		if (event.node.type != 'folder') {
+			return;
+		}
 
-	// 	// Use closest() to find the outermost parent with the specific class
-	// 	const outerDiv = innerDiv.closest(
-	// 		'.ant-tree-treenode-draggable'
-	// 	);
-	// 	console.log(outerDiv);
-	// 	setHighlighted(outerDiv);
+		if (borderRef.current)
+			borderRef.current.style.border =
+				'1px solid transparent';
 
-	// 	// if (parent) {
-	// 	// 	const parentElement = document.querySelector(
-	// 	// 		`[data-key="${parent.key}"]`
-	// 	// 	);
-	// 	// 	// console.log(parentElement);
-	// 	// 	if (parentElement) {
-	// 	// 		setHighlighted(parentElement);
-	// 	// 	}
-	// 	// }
-	// };
+		borderRef.current = outerDiv;
+		borderRef.current.style.border =
+			'1px solid #1890ff';
+	};
 
 	const handleDragOver = (event) => {
 		getMovingMouse({
@@ -539,12 +527,9 @@ const Card = () => {
 		});
 	};
 
+	// Not Necessary
 	// const handleDragLeave = (event) => {
-	// 	if (highlighted) {
-	// 		highlighted.classList.remove(styles.dragOver);
-	// 		highlighted.dataset.dragInside = 'false';
-	// 	}
-	// 	setHighlighted(null);
+	// 	console.log('drag leave', event);
 	// };
 
 	const getParentNode = (treeData, key) => {
@@ -597,7 +582,7 @@ const Card = () => {
 					onDrop={onDrop}
 					expandedKeys={expandedKeys}
 					onExpand={onExpand}
-					// onDragEnter={handleDragEnter}
+					onDragEnter={handleDragEnter}
 					onDragOver={handleDragOver}
 					onDragEnd={handleDragEnd}
 					// onDragLeave={handleDragLeave}

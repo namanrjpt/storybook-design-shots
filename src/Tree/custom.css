@@ -32,3 +32,8 @@
 	.ant-tree-switcher-icon {
 	font-size: 1.05rem;
 }
+
+.ant-tree-treenode {
+	transition: all 0.4s ease-in-out;
+	border-radius: 0.4rem;
+}

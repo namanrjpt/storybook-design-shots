@@ -12,8 +12,6 @@ const ParentCollapsible = ({
 	onExpand,
 	onDragStart,
 	onDragEnd,
-	// getMovingMouse,
-	// isCollapsed,
 	onDragOver,
 	onDragLeave,
 }) => {
@@ -39,6 +37,12 @@ const ParentCollapsible = ({
 					{nodeData.icon && (
 						<span className={styles.icon}>
 							{nodeData.icon}
+
+							{nodeData.isWorking && (
+								<span
+									className={styles.workingIcon}
+								></span>
+							)}
 						</span>
 					)}
 					<span className={styles.text}>

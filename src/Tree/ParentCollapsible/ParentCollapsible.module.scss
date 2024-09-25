@@ -8,6 +8,50 @@
 	> .icon {
 		font-size: 1.25rem;
 		color: #717171;
+		position: relative;
+
+		> svg:nth-child(1) {
+			font-size: 1.5rem;
+
+			> g {
+				fill: #717171 !important;
+				color: #717171 !important;
+			}
+		}
+
+		> .workingIcon {
+			display: block;
+			width: 0.45rem;
+			border-radius: 1rem;
+			position: absolute;
+			right: 1px;
+			bottom: 2px;
+			aspect-ratio: 1;
+			background-color: #ff7e1b;
+
+			@keyframes pulse {
+				0% {
+					transform: scale(1);
+					opacity: 1;
+				}
+				100% {
+					transform: scale(2.25);
+					opacity: 0;
+				}
+			}
+
+			&::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+				background-color: inherit;
+				animation: pulse 1.5s infinite ease-in-out;
+			}
+		}
 	}
 
 	> .text {
