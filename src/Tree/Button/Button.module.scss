@@ -48,8 +48,11 @@
 			border: 1px solid transparent;
 			box-shadow: none;
 
+			//https://cubic-bezier.com/
+			//https://easings.net/
 			> svg {
-				animation: rotate 0.4s ease-in-out;
+				animation: rotate 0.4s
+					cubic-bezier(0.87, 0, 0.13, 1); //This is the Cubic Bezier
 				animation-play-state: running;
 				animation-direction: normal;
 			}

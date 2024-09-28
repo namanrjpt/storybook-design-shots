@@ -287,7 +287,7 @@ const Card = () => {
 			const [itemData, setItemData] = useState({
 				type: type,
 				icon: icon,
-				text: text,
+				text: '',
 			});
 
 			// Item Delete & Enter Event Listener
@@ -360,6 +360,7 @@ const Card = () => {
 							})
 						}
 						value={itemData.text}
+						autoFocus
 					/>
 					<MdCheck
 						onClick={() => {
