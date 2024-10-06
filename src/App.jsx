@@ -1,12 +1,11 @@
-import TreeComponent from './Pages/TreeComponent.jsx';
 import Home from './Pages/Home.jsx';
-import Test from './Pages/Test.jsx';
 
 import {
 	BrowserRouter,
 	Route,
 	Routes,
 } from 'react-router-dom';
+import { routes } from './Routes.js';
 
 function App() {
 	return (
@@ -16,14 +15,15 @@ function App() {
 					path='/'
 					element={<Home />}
 				/>
-				<Route
-					path='/card'
-					element={<TreeComponent />}
-				/>
-				<Route
-					path='/test'
-					element={<Test />}
-				/>
+				{routes.map((route) => {
+					return (
+						<Route
+							key={route.id}
+							path={route.path}
+							element={<route.component />}
+						/>
+					);
+				})}
 			</Routes>
 		</BrowserRouter>
 	);

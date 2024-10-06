@@ -1,0 +1,101 @@
+.main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100vh;
+	width: 100%;
+	background-color: #131313;
+
+	> h1 {
+		color: white;
+		font-size: 2rem;
+		margin: 3rem 0 0 0;
+	}
+
+	.itemsWrapper {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: 1rem;
+		padding: 1rem 0;
+		overflow: auto;
+
+		> .item {
+			width: 50%;
+			border: 1px solid #ffffff48;
+			padding: 1rem;
+			height: auto;
+			display: flex;
+			align-items: center;
+			position: relative;
+			color: white;
+
+			> p {
+				&:nth-child(1) {
+					text-align: center;
+					width: 10%;
+					font-size: 1.5rem;
+				}
+
+				&:nth-child(2) {
+					text-align: left;
+					min-width: 30%;
+					font-size: 1.5rem;
+				}
+			}
+
+			> .sbButton {
+				width: 7%;
+				aspect-ratio: 1;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: absolute;
+				right: 3.5vw;
+				transition: all 0.2s ease-in-out;
+
+				&:hover {
+					cursor: pointer;
+					background-color: white;
+
+					> svg {
+						color: black;
+					}
+				}
+
+				> svg {
+					font-size: 2.5rem;
+					transition: all 0.2s ease-in-out;
+				}
+			}
+
+			> .previewButton {
+				width: 7%;
+				aspect-ratio: 1;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: absolute;
+				right: 0;
+				transition: all 0.2s ease-in-out;
+
+				&:hover {
+					cursor: pointer;
+					background-color: white;
+
+					> svg {
+						color: black;
+					}
+				}
+
+				> svg {
+					font-size: 2.5rem;
+					transition: all 0.2s ease-in-out;
+				}
+			}
+		}
+	}
+}

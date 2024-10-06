@@ -1,7 +1,8 @@
 import Card from './Card';
 
 export default {
-	title: 'Model Tree Table/Final Render',
+	title:
+		'Dribble Shots/Model Tree Table/Final Render',
 };
 
 export const FinalCard = (args) => (

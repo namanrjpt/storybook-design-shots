@@ -1,145 +1,281 @@
 import React, { useState } from 'react';
-import { Tree } from 'antd';
+import {
+	FaTrashAlt,
+	FaPlusCircle,
+	FaGripVertical,
+} from 'react-icons/fa';
+import {
+	DndProvider,
+	useDrag,
+	useDrop,
+} from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
-const initialData = [
-	{
-		title: 'Procedure_Br',
-		key: '0',
-		children: [
-			{
-				title: 'Procedures',
-				key: '0-0',
-				children: [
-					{
-						title: 'Configured',
-						key: '0-0-0',
-						isLeaf: true,
-					},
-					{
-						title: 'Working',
-						key: '0-0-1',
-						isLeaf: true,
-					},
-				],
-			},
-			{
-				title: 'Actions',
-				key: '0-1',
-				children: [
-					{
-						title: 'Configured',
-						key: '0-1-0',
-						isLeaf: true,
-					},
-					{
-						title: 'Working',
-						key: '0-1-1',
-						children: [
-							{
-								title: 'Action_1',
-								key: '0-1-1-0',
-								isLeaf: true,
-							},
-							{
-								title: 'Action_2',
-								key: '0-1-1-1',
-								isLeaf: true,
-							},
-							{
-								title: 'Action_3',
-								key: '0-1-1-2',
-								isLeaf: true,
-							},
-						],
-					},
-				],
-			},
-			{
-				title: 'Advanced',
-				key: '0-2',
-				isLeaf: true,
-			},
-			{
-				title: 'Disabled',
-				key: '0-3',
-				isLeaf: true,
-			},
-		],
-	},
-];
+// Condition Component
+const Condition = ({
+	condition,
+	onDelete,
+	index,
+	moveCondition,
+}) => {
+	const [, ref] = useDrag({
+		type: 'condition',
+		item: { index },
+	});
 
-const App = () => {
-	const [gData, setGData] = useState(initialData);
-	const [expandedKeys] = useState([
-		'0',
-		'0-0',
-		'0-1',
-		'0-1-1',
-	]); // Default expanded nodes
-
-	const onDragEnter = (info) => {
-		console.log('onDragEnter', info);
-	};
-
-	const onDrop = (info) => {
-		console.log('onDrop', info);
-		const dropKey = info.node.key;
-		const dragKey = info.dragNode.key;
-		const dropPos = info.node.pos.split('-');
-		const dropPosition =
-			info.dropPosition -
-			Number(dropPos[dropPos.length - 1]);
-
-		const loop = (data, key, callback) => {
-			for (let i = 0; i < data.length; i++) {
-				if (data[i].key === key) {
-					return callback(data[i], i, data);
-				}
-				if (data[i].children) {
-					loop(data[i].children, key, callback);
-				}
+	const [, drop] = useDrop({
+		accept: 'condition',
+		hover: (draggedItem) => {
+			if (draggedItem.index !== index) {
+				moveCondition(draggedItem.index, index);
+				draggedItem.index = index;
 			}
-		};
-
-		const data = [...gData];
-		let dragObj;
-		loop(data, dragKey, (item, index, arr) => {
-			arr.splice(index, 1);
-			dragObj = item;
-		});
-
-		if (!info.dropToGap) {
-			loop(data, dropKey, (item) => {
-				item.children = item.children || [];
-				item.children.unshift(dragObj);
-			});
-		} else {
-			let ar = [];
-			let i;
-			loop(data, dropKey, (_item, index, arr) => {
-				ar = arr;
-				i = index;
-			});
-			if (dropPosition === -1) {
-				ar.splice(i, 0, dragObj);
-			} else {
-				ar.splice(i + 1, 0, dragObj);
-			}
-		}
-		setGData(data);
-	};
+		},
+	});
 
 	return (
-		<Tree
-			className='draggable-tree'
-			defaultExpandedKeys={expandedKeys}
-			draggable
-			blockNode
-			onDragEnter={onDragEnter}
-			onDrop={onDrop}
-			treeData={gData}
-		/>
+		<div
+			ref={(node) => ref(drop(node))}
+			className='flex items-center space-x-4 my-2'
+		>
+			<FaGripVertical className='cursor-move text-gray-500' />
+			<Dropdown
+				options={condition.conditionOptions}
+				label='Where'
+			/>
+			<Dropdown
+				options={condition.operatorOptions}
+				label='Operator'
+			/>
+			<Dropdown
+				options={condition.valueOptions}
+				label='Value'
+			/>
+			<button
+				className='text-gray-500 hover:text-red-500'
+				onClick={() => onDelete(index)}
+			>
+				<FaTrashAlt />
+			</button>
+		</div>
 	);
 };
 
-export default App;
+// Dropdown Component
+const Dropdown = ({ options, label }) => {
+	const [selected, setSelected] = useState(
+		options[0]
+	);
+
+	return (
+		<div className='relative w-full'>
+			{label && (
+				<label className='text-sm text-gray-500 mb-1 block'>
+					{label}
+				</label>
+			)}
+			<select
+				className='w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500'
+				value={selected}
+				onChange={(e) => setSelected(e.target.value)}
+			>
+				{options.map((option, idx) => (
+					<option
+						key={idx}
+						value={option}
+					>
+						{option}
+					</option>
+				))}
+			</select>
+		</div>
+	);
+};
+
+// ConditionGroup Component
+const ConditionGroup = ({
+	group,
+	onDeleteGroup,
+	moveCondition,
+}) => {
+	const [conditions, setConditions] = useState(
+		group.conditions || []
+	);
+	const [subGroups, setSubGroups] = useState(
+		group.subGroups || []
+	);
+
+	// Add a condition
+	const addCondition = () => {
+		setConditions([
+			...conditions,
+			{
+				conditionOptions: [
+					'Health score',
+					'Next meeting',
+					'Last interaction',
+				],
+				operatorOptions: ['is', 'is not'],
+				valueOptions: [
+					'Critical',
+					'No meeting',
+					'No interaction',
+				],
+			},
+		]);
+	};
+
+	// Delete a condition
+	const deleteCondition = (index) => {
+		setConditions(
+			conditions.filter((_, i) => i !== index)
+		);
+	};
+
+	// Add a subgroup
+	const addSubGroup = () => {
+		setSubGroups([
+			...subGroups,
+			{ conditions: [] },
+		]);
+	};
+
+	// Move condition (for drag and drop)
+	const moveConditionHandler = (
+		fromIndex,
+		toIndex
+	) => {
+		const updatedConditions = [...conditions];
+		const [movedItem] = updatedConditions.splice(
+			fromIndex,
+			1
+		);
+		updatedConditions.splice(toIndex, 0, movedItem);
+		setConditions(updatedConditions);
+	};
+
+	return (
+		<div className='border-l-4 border-indigo-500 pl-4 bg-white shadow-md p-4 rounded-lg border border-gray-200 my-2 relative'>
+			<div className='absolute top-2 left-[-25px] bg-gray-50 px-2 py-1 text-sm text-gray-500 rounded-full'>
+				AND
+			</div>
+
+			{conditions.map((condition, index) => (
+				<Condition
+					key={index}
+					index={index}
+					condition={condition}
+					onDelete={deleteCondition}
+					moveCondition={moveConditionHandler}
+				/>
+			))}
+
+			{subGroups.map((subGroup, index) => (
+				<ConditionGroup
+					key={index}
+					group={subGroup}
+					onDeleteGroup={() => setSubGroups([])}
+				/>
+			))}
+
+			<div className='flex items-center space-x-2 my-4'>
+				<AddButton
+					label='Add condition'
+					onClick={addCondition}
+				/>
+				<AddButton
+					label='Add subgroup'
+					onClick={addSubGroup}
+				/>
+				<button
+					className='text-gray-500 hover:text-red-500'
+					onClick={onDeleteGroup}
+				>
+					<FaTrashAlt />
+				</button>
+			</div>
+		</div>
+	);
+};
+
+// AddButton Component
+const AddButton = ({ label, onClick }) => {
+	return (
+		<button
+			onClick={onClick}
+			className='flex items-center text-indigo-600 hover:text-indigo-800 font-semibold text-sm my-2'
+		>
+			<FaPlusCircle className='mr-1' /> {label}
+		</button>
+	);
+};
+
+// FilterGroup Component
+const FilterGroup = () => {
+	const [groups, setGroups] = useState([
+		{
+			conditions: [
+				{
+					conditionOptions: [
+						'Health score',
+						'Next meeting',
+						'Last interaction',
+					],
+					operatorOptions: ['is', 'is not'],
+					valueOptions: [
+						'Critical',
+						'No meeting',
+						'No interaction',
+					],
+				},
+			],
+		},
+	]);
+
+	// Add a top-level group
+	const addGroup = () => {
+		setGroups([
+			...groups,
+			{
+				conditions: [],
+			},
+		]);
+	};
+
+	// Delete a group
+	const deleteGroup = (index) => {
+		setGroups(groups.filter((_, i) => i !== index));
+	};
+
+	return (
+		<DndProvider backend={HTML5Backend}>
+			<div className='p-6 bg-gray-50 rounded-lg shadow-md w-full max-w-lg'>
+				{groups.map((group, index) => (
+					<ConditionGroup
+						key={index}
+						group={group}
+						onDeleteGroup={() => deleteGroup(index)}
+					/>
+				))}
+
+				<div className='flex items-center space-x-2 my-4'>
+					<AddButton
+						label='Add group'
+						onClick={addGroup}
+					/>
+				</div>
+			</div>
+		</DndProvider>
+	);
+};
+
+// Test Component
+function Test() {
+	return (
+		<div className='min-h-screen bg-gray-100 flex justify-center items-center'>
+			<FilterGroup />
+		</div>
+	);
+}
+
+export default Test;

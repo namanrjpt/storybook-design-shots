@@ -1,7 +1,8 @@
 import Button from './Button';
 
 export default {
-	title: 'Model Tree Table/Insert Button',
+	title:
+		'Dribble Shots/Model Tree Table/Insert Button',
 	component: Button,
 };
 

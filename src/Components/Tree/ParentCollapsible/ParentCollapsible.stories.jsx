@@ -98,7 +98,7 @@ const data = [
 ];
 
 export default {
-	title: 'Model Tree Table/Collapse',
+	title: 'Dribble Shots/Model Tree Table/Collapse',
 	component: ParentCollapse,
 };
 
