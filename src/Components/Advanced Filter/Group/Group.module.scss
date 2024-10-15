@@ -1,0 +1,189 @@
+.main {
+	width: 90%;
+	background-color: #f7f7f7;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	position: relative;
+
+	> p {
+		color: #464646;
+		font-weight: 600;
+		font-size: 0.9vw;
+		font-weight: 500;
+		margin: 0 0 0.5rem 0.75rem;
+	}
+
+	> .conditionWrapper {
+		width: 100%;
+
+		> .primaryWrapper {
+			padding: 0 0.7rem;
+			margin: 0.25rem 0;
+			display: flex;
+			align-items: center;
+
+			> p {
+				font-size: 1.15rem;
+				width: 3.6vw;
+			}
+		}
+
+		> .connectiveWrapper {
+			width: 100%;
+			height: auto;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0.5rem 0 0 0;
+
+			> .ANDTag {
+				visibility: visible;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				min-width: 11.2%;
+				align-self: stretch;
+				position: relative;
+
+				&::after {
+					content: '';
+					position: absolute;
+					border: 1px solid #80808083;
+					height: 95%;
+					width: 100%;
+					border-radius: 1rem;
+					transform: translate(50%, 0);
+					z-index: 0;
+				}
+
+				> .connective {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					gap: 0.5rem;
+					min-width: 4.5rem;
+					padding: 0.5rem 0.35vw;
+					background-color: #f4f4f4;
+					border: 1px solid #8080802c;
+					border-radius: 0.75rem;
+					cursor: pointer;
+					z-index: 15;
+
+					> p {
+						font-size: 0.65vw;
+						color: #464646;
+						font-weight: 600;
+					}
+
+					> svg {
+						font-size: 0.7vw;
+						color: #464646;
+						cursor: pointer;
+					}
+				}
+			}
+
+			> .hideBorder {
+				&::after {
+					border: 1px solid transparent;
+				}
+			}
+
+			> .inactive {
+				display: none;
+			}
+
+			> .conditions {
+				width: 100%;
+				z-index: 20;
+				padding: 0 0.25rem;
+				background-color: #f7f7f7;
+
+				> div {
+					margin: 0;
+
+					&:nth-child(n + 2) {
+						margin: 0.5rem 0 0 0;
+					}
+				}
+			}
+		}
+
+		> .hide {
+			visibility: hidden;
+		}
+	}
+
+	> .bottomButtons {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		gap: 2rem;
+		padding: 1rem 0.5rem 0 0.5rem;
+		width: 100%;
+
+		> .wrapperOne {
+			width: 100%;
+			display: flex;
+			gap: 1.5rem;
+
+			> .addCondition {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.5rem;
+				cursor: pointer;
+
+				> svg {
+					color: #6b26f1;
+					font-size: 1.25rem;
+				}
+
+				> p {
+					color: #6b26f1;
+					font-size: 1rem;
+					font-weight: 500;
+				}
+			}
+
+			> .addGroup {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.5rem;
+				cursor: pointer;
+
+				> svg {
+					color: #7b818d;
+					font-size: 1.25rem;
+				}
+
+				> p {
+					color: #7b818d;
+					font-size: 1rem;
+					font-weight: 500;
+				}
+			}
+		}
+
+		> .addGroup {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0.5rem;
+			width: 20%;
+			cursor: pointer;
+
+			> svg {
+				color: #7b818d;
+				font-size: 1.25rem;
+			}
+
+			> p {
+				color: #7b818d;
+				font-size: 1rem;
+				font-weight: 500;
+			}
+		}
+	}
+}

@@ -1,6 +1,7 @@
 import React, {
 	useEffect,
 	useState,
+	useRef,
 } from 'react';
 import styles from './Style.module.scss';
 import {
@@ -10,14 +11,12 @@ import {
 } from '../Logic';
 import { MdOutlineDragIndicator } from 'react-icons/md';
 import { TbTrash } from 'react-icons/tb';
+import { IoChevronDownSharp } from 'react-icons/io5';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 const PrimaryCondition = ({ onDelete }) => {
-	const [selectedConfig, setSelectedConfig] =
-		useState({
-			field: 'Name',
-			operator: '',
-			value: '',
-		});
+	const menuRef = useRef(null);
 
 	const getInitialValues = (key) => {
 		return (
@@ -26,8 +25,15 @@ const PrimaryCondition = ({ onDelete }) => {
 		);
 	};
 
+	const [selectedConfig, setSelectedConfig] =
+		useState({
+			field: 'Owner',
+			operator: '',
+			value: getInitialValues('Owner')[0],
+		});
+
 	const [values, setValues] = useState(
-		getInitialValues('Name')
+		getInitialValues('Owner')
 	);
 
 	const getKeys = (data) => {
@@ -46,9 +52,118 @@ const PrimaryCondition = ({ onDelete }) => {
 		getKeys(dummyData)
 	);
 
+	const [isValueMenuOpen, setIsValueMenuOpen] =
+		useState(false);
+
+	useGSAP(
+		() => {
+			if (isValueMenuOpen) {
+				gsap.to(menuRef.current, {
+					duration: 0.35,
+					maxHeight: '10rem',
+					visibility: 'visible',
+				});
+			} else {
+				gsap.to(menuRef.current, {
+					duration: 0.35,
+					maxHeight: '0rem',
+					onComplete: () => {
+						gsap.set(menuRef.current, {
+							visibility: 'hidden',
+						});
+					},
+				});
+			}
+		},
+		{
+			dependencies: [isValueMenuOpen],
+		}
+	);
+
+	// ['Multiple', 'User', 'No Meeting', 'No Interaction']
+
+	const [
+		customSelectPreview,
+		setCustomSelectPreview,
+	] = useState('');
+
+	useEffect(() => {
+		setCustomSelectPreview(selectedConfig.field);
+	}, [selectedConfig]);
+
+	const RenderCustomSelect = ({ type, value }) => {
+		switch (type) {
+			case 'Stage':
+				return (
+					<>
+						<div className={styles.itemName}>
+							<p>Required</p>
+						</div>
+						<div className={styles.itemName}>
+							<p>+1</p>
+						</div>
+					</>
+				);
+			case 'Owner':
+				return (
+					<div
+						className={styles.itemName}
+						onClick={() => {
+							setCustomSelectPreview('User');
+						}}
+					>
+						<p>{value}</p>
+					</div>
+				);
+			case 'Health score':
+				return (
+					<div
+						className={styles.itemName}
+						onClick={() => {
+							setCustomSelectPreview('No Meeting');
+						}}
+					>
+						<p>{value}</p>
+					</div>
+				);
+			case 'Next meeting':
+				return (
+					<div
+						className={styles.itemName}
+						onClick={() => {
+							setCustomSelectPreview('No Interaction');
+						}}
+					>
+						<p>{value}</p>
+					</div>
+				);
+			case 'Last interaction':
+				return (
+					<div
+						className={styles.itemName}
+						onClick={() => {
+							setCustomSelectPreview('No Interaction');
+						}}
+					>
+						<p>{value}</p>
+					</div>
+				);
+			default:
+				return (
+					<>
+						<div className={styles.itemName}>
+							<p>Required</p>
+						</div>
+						<div className={styles.itemName}>
+							<p>+1</p>
+						</div>
+					</>
+				);
+		}
+	};
+
 	return (
 		<div className={styles.main}>
-			<p>Where :</p>
 			<div className={styles.conditionWrapper}>
 				<div className={styles.grabber}>
 					<MdOutlineDragIndicator />
@@ -62,6 +177,9 @@ const PrimaryCondition = ({ onDelete }) => {
 							setSelectedConfig({
 								...selectedConfig,
 								field: e.target.value,
+								value: getInitialValues(
+									e.target.value
+								)[0],
 							});
 							setValues(
 								dummyData.find(
@@ -98,22 +216,43 @@ const PrimaryCondition = ({ onDelete }) => {
 					</select>
 				</div>
 				<div className={styles.condition}>
-					<select
-						name='Select'
-						id=''
-						onChange={(e) => {
-							setSelectedConfig({
-								...selectedConfig,
-								value: e.target.value,
-							});
-						}}
+					<div className={styles.dropdown}>
+						<RenderCustomSelect
+							type={selectedConfig.field}
+							value={selectedConfig.value}
+						/>
+						<div
+							className={styles.arrowButton}
+							onClick={() => {
+								setIsValueMenuOpen(!isValueMenuOpen);
+							}}
+						>
+							<IoChevronDownSharp
+								className={isValueMenuOpen && styles.open}
+							/>
+						</div>
+					</div>
+					<div
+						ref={menuRef}
+						className={styles.options}
 					>
 						{values.map((data) => {
 							return (
-								<option value={data}>{data}</option>
+								<div
+									className={styles.optionData}
+									onClick={() => {
+										setSelectedConfig({
+											...selectedConfig,
+											value: data,
+										});
+										setIsValueMenuOpen(false);
+									}}
+								>
+									{data}
+								</div>
 							);
 						})}
-					</select>
+					</div>
 				</div>
 			</div>
 			<TbTrash

@@ -1,15 +1,42 @@
+* {
+	--sb-track-color: #ffffff;
+	--sb-thumb-color: #efefef;
+	--sb-size: 2px;
+}
+
+*::-webkit-scrollbar {
+	width: var(--sb-size);
+}
+
+*::-webkit-scrollbar-track {
+	background: var(--sb-track-color);
+	border-radius: 1px;
+}
+
+*::-webkit-scrollbar-thumb {
+	background: var(--sb-thumb-color);
+	border-radius: 1px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+	* {
+		scrollbar-color: var(--sb-thumb-color)
+			var(--sb-track-color);
+	}
+}
+
 .main {
-	padding: 1rem;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
+	// margin: 0.5rem 0 0 0;
 
 	> p {
 		color: #464646;
 		font-weight: 600;
-		font-size: 1.1vw;
+		font-size: 1vw;
 		font-weight: 500;
-		width: 5vw;
+		text-wrap: nowrap;
 	}
 
 	> .conditionWrapper {
@@ -17,12 +44,13 @@
 		align-items: center;
 		justify-content: flex-start;
 		border-radius: 0.5rem;
-		overflow: hidden;
 		border: 1px solid #8080802c;
+		background-color: white;
 
 		> .grabber {
 			height: 100%;
-			background-color: #00000014;
+			background-color: #c1c1c11a;
+			border-right: 1px solid #8080802c;
 			padding: 0.5rem;
 			cursor: pointer;
 
@@ -35,12 +63,14 @@
 		> .condition {
 			width: fit-content;
 			padding: 0 1rem 0 0;
+			background-color: white;
 
 			> select {
-				width: 10vw;
+				max-width: 10vw;
 				padding: 0.5rem;
 				font-size: 1.15rem;
 				border-radius: 0;
+				background-color: white;
 
 				&:focus {
 					outline: none;
@@ -49,6 +79,95 @@
 
 			&:not(:last-child) {
 				border-right: 1px solid #8080802c;
+			}
+
+			&:last-child {
+				width: fit-content;
+				position: relative;
+				background-color: white;
+				height: 100%;
+
+				> .dropdown {
+					max-width: 10vw;
+					display: flex;
+					gap: 0.5rem;
+
+					> .itemName {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						background-color: red;
+						padding: 0.1rem 0.75rem;
+						border-radius: 0.6rem;
+						background-color: #fdf2f8;
+						border: 1px solid #b600492a;
+						margin: 0 0 0 0.75rem;
+
+						> p {
+							color: #b60048;
+							font-size: 1rem;
+							text-overflow: clip;
+							white-space: nowrap;
+							overflow: hidden;
+						}
+
+						&:nth-child(2) {
+							background-color: #f4f4f489;
+							border: 1px solid #00000013;
+							margin: 0;
+
+							> p {
+								color: #000000;
+							}
+						}
+					}
+
+					> .arrowButton {
+						display: flex;
+						align-items: center;
+						justify-content: flex-end;
+						width: 100%;
+
+						> svg {
+							font-size: 1.25rem;
+							color: #6f6e6e;
+							cursor: pointer;
+							transition: all 0.2s ease-in-out;
+						}
+
+						> .open {
+							rotate: 180deg;
+							transition: all 0.2s ease-in-out;
+						}
+					}
+				}
+
+				> .options {
+					position: absolute;
+					top: 100%;
+					margin: 0.5rem 0 0 0;
+					max-height: 0rem;
+					width: 100%;
+					background-color: white;
+					border: 1px solid #00000013;
+					overflow-y: auto;
+					z-index: 50000000;
+
+					> .optionData {
+						color: black;
+						padding: 0.5rem 1rem;
+						cursor: pointer;
+						transition: all 0.2s ease-in-out;
+
+						&:hover {
+							background-color: #f0f0f0;
+						}
+
+						&:not(:last-child) {
+							border-bottom: 1px solid #00000013;
+						}
+					}
+				}
 			}
 		}
 	}

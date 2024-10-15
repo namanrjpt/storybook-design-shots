@@ -12,38 +12,32 @@ export const connectives = [
 export const dummyData = [
 	{
 		id: 1,
-		name: 'Name',
+		name: 'Owner',
 		values: ['John Doe', 'Jane Doe'],
 	},
 	{
 		id: 2,
-		name: 'Age',
+		name: 'Stage',
 		values: ['20', '30', '40'],
 	},
 	{
 		id: 3,
-		name: 'City',
-		values: ['New York', 'Los Angeles', 'Chicago'],
+		name: 'Health score',
+		values: ['Critical', 'Good', 'Bad'],
 	},
 	{
 		id: 4,
-		name: 'Country',
-		values: ['USA', 'Canada', 'Mexico'],
+		name: 'Next meeting',
+		values: [
+			'No meeting',
+			'Last Week',
+			'Last month',
+		],
 	},
 	{
 		id: 5,
-		name: 'Gender',
-		values: ['Male', 'Female'],
-	},
-	{
-		id: 6,
-		name: 'Occupation',
-		values: ['Engineer', 'Doctor', 'Lawyer'],
-	},
-	{
-		id: 7,
-		name: 'Hobbies',
-		values: ['Reading', 'Writing', 'Travelling'],
+		name: 'Last interaction',
+		values: ['No interaction', 'Last Week'],
 	},
 ];
 
@@ -54,26 +48,10 @@ export const operators = [
 	},
 	{
 		id: 2,
-		name: 'is not',
+		name: 'is any of',
 	},
 	{
 		id: 3,
-		name: 'contains',
-	},
-	{
-		id: 4,
-		name: 'does not contain',
-	},
-	{
-		id: 5,
 		name: 'when',
-	},
-	{
-		id: 6,
-		name: 'Is Empty',
-	},
-	{
-		id: 7,
-		name: 'Is Not Empty',
 	},
 ];

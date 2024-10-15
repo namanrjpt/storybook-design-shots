@@ -1,13 +1,110 @@
 .main {
-	height: 60vh;
+	min-height: 60vh;
 	width: 50%;
 	background-color: white;
-	padding: 1rem;
-	border-radius: 2rem;
+	padding: 1rem 1rem 5rem 2rem;
+	border-radius: 1.5rem;
 	display: flex;
 	flex-direction: column;
 	position: relative;
 	overflow: hidden;
+
+	> .primaryWrapper {
+		display: flex;
+		align-items: center;
+		padding: 0 1.1vw;
+		gap: 1.2rem;
+
+		> p {
+			font-size: 1vw;
+			color: #464646;
+			font-weight: 500;
+		}
+
+		> div {
+			margin: 0;
+			padding: 0;
+		}
+	}
+
+	> .lowerComponents {
+		display: flex;
+		width: 100%;
+		margin: 0.5rem 0;
+
+		> .ANDTag {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 10%;
+			position: relative;
+
+			&::after {
+				content: '';
+				position: absolute;
+				border: 1px solid #80808083;
+				height: 90%;
+				width: 100%;
+				border-radius: 1rem;
+				transform: translate(50%, 0);
+				z-index: 0;
+			}
+
+			> .connective {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.5rem;
+				min-width: 5rem;
+				padding: 0.59rem 0.65vw;
+				background-color: #f4f4f4;
+				border: 1px solid #8080802c;
+				border-radius: 0.75rem;
+				cursor: pointer;
+				z-index: 15;
+
+				> p {
+					font-size: 0.75vw;
+					color: #464646;
+					font-weight: 600;
+				}
+
+				> svg {
+					font-size: 0.75vw;
+					color: #464646;
+					cursor: pointer;
+				}
+			}
+		}
+
+		.inactive {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 10%;
+
+			&::after {
+				content: '';
+				position: absolute;
+				border: 1px solid transparent;
+				height: 85%;
+				width: 100%;
+				border-radius: 1rem;
+				transform: translate(50%, 0);
+				z-index: 0;
+			}
+		}
+
+		> .components {
+			width: 90%;
+			z-index: 20;
+			padding: 0 0.77rem;
+			background-color: white;
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+	}
 
 	> .bottomButtons {
 		position: absolute;
@@ -19,21 +116,47 @@
 		padding: 1rem 0 2rem 2rem;
 		gap: 2rem;
 
-		> .addCondition {
+		> .wrapperOne {
+			width: 100%;
 			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 0.5rem;
+			gap: 1.5rem;
 
-			> svg {
-				color: #6b26f1;
-				font-size: 1.5rem;
+			> .addCondition {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.5rem;
+				cursor: pointer;
+
+				> svg {
+					color: #6b26f1;
+					font-size: 1.5rem;
+				}
+
+				> p {
+					color: #6b26f1;
+					font-size: 1.1rem;
+					font-weight: 600;
+				}
 			}
 
-			> p {
-				color: #6b26f1;
-				font-size: 1.1rem;
-				font-weight: 600;
+			> .addGroup {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.5rem;
+				cursor: pointer;
+
+				> svg {
+					color: #7b818d;
+					font-size: 1.5rem;
+				}
+
+				> p {
+					color: #7b818d;
+					font-size: 1.1rem;
+					font-weight: 600;
+				}
 			}
 		}
 
@@ -42,6 +165,8 @@
 			align-items: center;
 			justify-content: center;
 			gap: 0.5rem;
+			width: 20%;
+			cursor: pointer;
 
 			> svg {
 				color: #7b818d;
