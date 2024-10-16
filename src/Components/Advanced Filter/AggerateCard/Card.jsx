@@ -66,11 +66,12 @@ const Card = () => {
 		}
 	};
 
-	const onDelete = useCallback((id) => {
+	const onDelete = (id) => {
+		console.log(id);
 		setGroups((prevGroups) =>
 			prevGroups.filter((group) => group.id !== id)
 		);
-	}, []);
+	};
 
 	useEffect(() => {
 		if (groups.length >= 1) {

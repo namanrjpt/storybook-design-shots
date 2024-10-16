@@ -15,7 +15,7 @@ import { IoChevronDownSharp } from 'react-icons/io5';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
-const PrimaryCondition = ({ onDelete }) => {
+const PrimaryCondition = ({ id, onDelete }) => {
 	const menuRef = useRef(null);
 
 	const getInitialValues = (key) => {
@@ -255,9 +255,7 @@ const PrimaryCondition = ({ onDelete }) => {
 					</div>
 				</div>
 			</div>
-			<TbTrash
-				onClick={() => onDelete(selectedConfig.id)}
-			/>
+			<TbTrash onClick={() => onDelete(id)} />
 		</div>
 	);
 };
