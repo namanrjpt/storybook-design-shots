@@ -1,8 +1,6 @@
 import React, {
 	useEffect,
 	useState,
-	useRef,
-	useCallback,
 } from 'react';
 import PrimaryCondition from '../PrimaryCondition/PrimaryCondition';
 import styles from './Card.module.scss';

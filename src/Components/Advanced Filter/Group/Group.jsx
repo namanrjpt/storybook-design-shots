@@ -10,7 +10,7 @@ import { TfiLoop } from 'react-icons/tfi';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
-const Group = () => {
+const Group = ({ onDelete }) => {
 	const iconRef = useRef(null);
 	const [conditions, setConditions] = useState([
 		{

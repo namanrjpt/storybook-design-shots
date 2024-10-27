@@ -96,10 +96,10 @@ const PrimaryCondition = ({ id, onDelete }) => {
 			case 'Stage':
 				return (
 					<>
-						<div className={styles.itemName}>
+						<div className={styles.multiItem}>
 							<p>Required</p>
 						</div>
-						<div className={styles.itemName}>
+						<div className={styles.multiItem}>
 							<p>+1</p>
 						</div>
 					</>
@@ -107,22 +107,27 @@ const PrimaryCondition = ({ id, onDelete }) => {
 			case 'Owner':
 				return (
 					<div
-						className={styles.itemName}
+						className={styles.userName}
 						onClick={() => {
 							setCustomSelectPreview('User');
 						}}
 					>
+						<img
+							src='https://sholaemmanuel.com/wp-content/uploads/2024/06/photo-1570295999919-56ceb5ecca61.jpg'
+							alt=''
+						/>
 						<p>{value}</p>
 					</div>
 				);
 			case 'Health score':
 				return (
 					<div
-						className={styles.itemName}
+						className={styles.health}
 						onClick={() => {
 							setCustomSelectPreview('No Meeting');
 						}}
 					>
+						<div className={styles.icon} />
 						<p>{value}</p>
 					</div>
 				);
@@ -151,10 +156,10 @@ const PrimaryCondition = ({ id, onDelete }) => {
 			default:
 				return (
 					<>
-						<div className={styles.itemName}>
+						<div className={styles.multiItem}>
 							<p>Required</p>
 						</div>
-						<div className={styles.itemName}>
+						<div className={styles.multiItem}>
 							<p>+1</p>
 						</div>
 					</>
