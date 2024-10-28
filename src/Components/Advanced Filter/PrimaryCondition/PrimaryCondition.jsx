@@ -4,11 +4,7 @@ import React, {
 	useRef,
 } from 'react';
 import styles from './Style.module.scss';
-import {
-	connectives,
-	operators,
-	dummyData,
-} from '../Logic';
+import { operators, dummyData } from '../Logic';
 import { MdOutlineDragIndicator } from 'react-icons/md';
 import { TbTrash } from 'react-icons/tb';
 import { IoChevronDownSharp } from 'react-icons/io5';
