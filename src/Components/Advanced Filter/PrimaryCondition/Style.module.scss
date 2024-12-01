@@ -83,6 +83,8 @@
 				> .dropdown {
 					display: flex;
 					gap: 0.5rem;
+					overflow: hidden;
+					min-width: 13vw;
 
 					> .multiItem {
 						display: flex;

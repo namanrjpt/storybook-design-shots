@@ -4,7 +4,7 @@ import Card from '../AggerateCard/Card';
 //bg-[#EFF2F6]
 const Filter = () => {
 	return (
-		<div className='bg-[#EFF2F6] h-screen w-full flex items-center justify-center'>
+		<div className='bg-[#EFF2F6] h-dvh w-full flex py-5 items-start justify-center overflow-y-auto'>
 			<Card />
 		</div>
 	);

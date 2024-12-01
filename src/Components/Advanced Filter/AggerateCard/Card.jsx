@@ -66,9 +66,28 @@ const Card = () => {
 
 	const onDelete = (id) => {
 		console.log(id);
-		setGroups((prevGroups) =>
-			prevGroups.filter((group) => group.id !== id)
+		const updatedGroups = groups.filter(
+			(group) => group.id !== id
 		);
+		setGroups(updatedGroups);
+	};
+
+	const moveCondition = (
+		fromGroupIndex,
+		fromIndex,
+		toGroupIndex,
+		toIndex
+	) => {
+		const updatedGroups = [...groups];
+		const [movedCondition] = updatedGroups[
+			fromGroupIndex
+		].conditions.splice(fromIndex, 1);
+		updatedGroups[toGroupIndex].conditions.splice(
+			toIndex,
+			0,
+			movedCondition
+		);
+		setGroups(updatedGroups);
 	};
 
 	useEffect(() => {
@@ -84,7 +103,7 @@ const Card = () => {
 			...prevGroups,
 			{
 				type: 'condition',
-				id: Math.random(),
+				id: prevGroups.length + 1,
 				conditions: [
 					{
 						field: 'Owner',
@@ -101,7 +120,7 @@ const Card = () => {
 			...prevGroups,
 			{
 				type: 'group',
-				id: Math.random(),
+				id: prevGroups.length + 1,
 				conditions: [
 					{
 						field: 'Owner',
@@ -154,12 +173,14 @@ const Card = () => {
 					</div>
 				)}
 				<div className={styles.components}>
-					{groups.map((group) => {
+					{groups.map((group, index) => {
 						if (group.type === 'condition') {
 							return (
 								<PrimaryCondition
 									key={group.id}
 									id={group.id}
+									index={index}
+									moveCondition={moveCondition}
 									onDelete={onDelete}
 								/>
 							);
