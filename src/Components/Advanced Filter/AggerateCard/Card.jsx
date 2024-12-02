@@ -154,7 +154,23 @@ const Card = () => {
 				<PrimaryCondition onDelete={onDelete} />
 			</div>
 			<div className={styles.lowerComponents}>
-				{isConnectiveActive && (
+				{isConnectiveActive ? (
+					<div
+						className={
+							groups.length > 1
+								? `${styles.ANDTag}`
+								: `${styles.ANDTag} ${styles.inactive}`
+						}
+					>
+						<div
+							className={styles.connective}
+							onClick={changeConnective}
+						>
+							<p>{connective}</p>
+							<TfiLoop id='iconConnective' />
+						</div>
+					</div>
+				) : (
 					<div
 						className={
 							groups.length > 1
