@@ -6,7 +6,7 @@ export default {
 };
 
 const Template = (args) => (
-	<div className='bg-black h-screen w-full flex items-center justify-center'>
+	<div className='bg-[#131313] h-screen w-full flex items-center justify-center'>
 		<PrimaryCondition {...args} />
 	</div>
 );

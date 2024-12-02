@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
+    "@hello-pangea/dnd": "^17.0.0",
     "antd": "^5.20.6",
     "gsap": "^3.12.5",
     "lodash": "^4.17.21",

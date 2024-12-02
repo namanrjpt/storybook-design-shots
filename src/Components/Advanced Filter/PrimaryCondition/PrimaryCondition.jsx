@@ -11,13 +11,7 @@ import { IoChevronDownSharp } from 'react-icons/io5';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
-const PrimaryCondition = ({
-	id,
-	index,
-	groupIndex,
-	moveCondition,
-	onDelete,
-}) => {
+const PrimaryCondition = ({ id, onDelete }) => {
 	const menuRef = useRef(null);
 
 	const getInitialValues = (key) => {
@@ -169,45 +163,13 @@ const PrimaryCondition = ({
 		}
 	};
 
-	const handleDragStart = (e) => {
-		e.dataTransfer.setData(
-			'text/plain',
-			JSON.stringify({ groupIndex, index })
-		);
-		e.dataTransfer.effectAllowed = 'move';
-	};
-
-	const handleDragOver = (e) => {
-		e.preventDefault();
-		e.dataTransfer.dropEffect = 'move';
-	};
-
-	const handleDrop = (e) => {
-		e.preventDefault();
-		const {
-			groupIndex: fromGroupIndex,
-			index: fromIndex,
-		} = JSON.parse(
-			e.dataTransfer.getData('text/plain')
-		);
-		moveCondition(
-			fromGroupIndex,
-			fromIndex,
-			groupIndex,
-			index
-		);
-	};
-
 	return (
-		<div
-			className={styles.main}
-			draggable
-			onDragStart={handleDragStart}
-			onDragOver={handleDragOver}
-			onDrop={handleDrop}
-		>
+		<div className={styles.main}>
 			<div className={styles.conditionWrapper}>
-				<div className={styles.grabber}>
+				<div
+					className={styles.grabber}
+					onDrag={(e) => e.stopPropagation()}
+				>
 					<MdOutlineDragIndicator />
 				</div>
 				<div className={styles.condition}>

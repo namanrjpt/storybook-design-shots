@@ -2,13 +2,18 @@ import React, {
 	useEffect,
 	useState,
 } from 'react';
+import {
+	DragDropContext,
+	Droppable,
+	Draggable,
+} from '@hello-pangea/dnd';
 import PrimaryCondition from '../PrimaryCondition/PrimaryCondition';
+import Group from '../Group/Group';
 import styles from './Card.module.scss';
 import { MdOutlineAdd } from 'react-icons/md';
-import Group from '../Group/Group';
+import { TfiLoop } from 'react-icons/tfi';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { TfiLoop } from 'react-icons/tfi';
 
 const Card = () => {
 	const [groups, setGroups] = useState([
@@ -38,7 +43,6 @@ const Card = () => {
 
 	const [connective, setConnective] =
 		useState('AND');
-
 	const [
 		isConnectiveActive,
 		setIsConnectiveActive,
@@ -65,37 +69,32 @@ const Card = () => {
 	};
 
 	const onDelete = (id) => {
-		console.log(id);
 		const updatedGroups = groups.filter(
 			(group) => group.id !== id
 		);
 		setGroups(updatedGroups);
 	};
 
-	const moveCondition = (
-		fromGroupIndex,
-		fromIndex,
-		toGroupIndex,
-		toIndex
-	) => {
+	const moveGroup = (fromIndex, toIndex) => {
 		const updatedGroups = [...groups];
-		const [movedCondition] = updatedGroups[
-			fromGroupIndex
-		].conditions.splice(fromIndex, 1);
-		updatedGroups[toGroupIndex].conditions.splice(
-			toIndex,
-			0,
-			movedCondition
+		const [movedGroup] = updatedGroups.splice(
+			fromIndex,
+			1
 		);
+		updatedGroups.splice(toIndex, 0, movedGroup);
 		setGroups(updatedGroups);
 	};
 
+	const onDragEnd = (result) => {
+		if (!result.destination) return;
+		moveGroup(
+			result.source.index,
+			result.destination.index
+		);
+	};
+
 	useEffect(() => {
-		if (groups.length >= 1) {
-			setIsConnectiveActive(true);
-		} else {
-			setIsConnectiveActive(false);
-		}
+		setIsConnectiveActive(groups.length > 1);
 	}, [groups]);
 
 	const addCondition = () => {
@@ -172,29 +171,50 @@ const Card = () => {
 						</div>
 					</div>
 				)}
-				<div className={styles.components}>
-					{groups.map((group, index) => {
-						if (group.type === 'condition') {
-							return (
-								<PrimaryCondition
-									key={group.id}
-									id={group.id}
-									index={index}
-									moveCondition={moveCondition}
-									onDelete={onDelete}
-								/>
-							);
-						} else {
-							return (
-								<Group
-									key={group.id}
-									id={group.id}
-									onDelete={onDelete}
-								/>
-							);
-						}
-					})}
-				</div>
+				<DragDropContext onDragEnd={onDragEnd}>
+					<Droppable droppableId='groups'>
+						{(provided) => (
+							<div
+								ref={provided.innerRef}
+								{...provided.droppableProps}
+								className={styles.components}
+							>
+								{groups.map((group, index) => (
+									<Draggable
+										key={`group-${group.id}`}
+										draggableId={`group-${group.id}`}
+										index={index}
+									>
+										{(provided) => (
+											<div
+												ref={provided.innerRef}
+												{...provided.draggableProps}
+												{...provided.dragHandleProps}
+											>
+												{group.type === 'condition' ? (
+													<PrimaryCondition
+														key={group.id}
+														id={group.id}
+														index={index}
+														moveCondition={moveGroup}
+														onDelete={onDelete}
+													/>
+												) : (
+													<Group
+														key={group.id}
+														id={group.id}
+														onDelete={onDelete}
+													/>
+												)}
+											</div>
+										)}
+									</Draggable>
+								))}
+								{provided.placeholder}
+							</div>
+						)}
+					</Droppable>
+				</DragDropContext>
 			</div>
 			<div className={styles.bottomButtons}>
 				<div className={styles.wrapperOne}>
