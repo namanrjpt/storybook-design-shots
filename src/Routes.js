@@ -1,7 +1,9 @@
 import TreeComponent from './Components/Tree/TreeComponent';
 import Filter from './Components/Advanced Filter/FinalRender/Filter';
+import NavbarFinal from './Components/Navigation Bar/Navbar-Final/NavbarFinal.jsx';
+
+// Internal Imports
 import Error from './Pages/Error';
-import Test from './Pages/Test';
 
 export const routes = [
 	{
@@ -21,13 +23,13 @@ export const routes = [
 		component: Filter,
 	},
 	{
-		id: 3,
-		path: '/test',
-		name: 'Test',
-		component: Test,
+		id: 4,
+		path: '/navigation-bar',
+		name: 'Navigation Bar',
+		component: NavbarFinal,
 	},
 	{
-		id: 4,
+		id: 5,
 		path: '*',
 		name: 'Error',
 		component: Error,
