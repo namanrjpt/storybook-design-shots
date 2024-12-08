@@ -155,7 +155,7 @@ const ConditionGroup = ({
 	};
 
 	return (
-		<div className='border-l-4 border-indigo-500 pl-4 bg-white shadow-md p-4 rounded-lg border border-gray-200 my-2 relative'>
+		<div className='border-l-4 pl-4 bg-white shadow-md p-4 rounded-lg border border-gray-200 my-2 relative'>
 			<div className='absolute top-2 left-[-25px] bg-gray-50 px-2 py-1 text-sm text-gray-500 rounded-full'>
 				AND
 			</div>

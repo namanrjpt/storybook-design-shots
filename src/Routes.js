@@ -1,7 +1,7 @@
 import TreeComponent from './Components/Tree/TreeComponent';
 import Filter from './Components/Advanced Filter/FinalRender/Filter';
 import NavbarFinal from './Components/Navigation Bar/Navbar-Final/NavbarFinal.jsx';
-
+import AIChat from './Components/AI TextChat/Final/Final.jsx';
 // Internal Imports
 import Error from './Pages/Error';
 
@@ -30,6 +30,18 @@ export const routes = [
 	},
 	{
 		id: 5,
+		path: '/ai-chat',
+		name: 'AI Chat',
+		component: AIChat,
+	},
+	{
+		id: 6,
+		path: '/Upload-modal',
+		name: 'Upload Modal',
+		component: NavbarFinal,
+	},
+	{
+		id: 100,
 		path: '*',
 		name: 'Error',
 		component: Error,
