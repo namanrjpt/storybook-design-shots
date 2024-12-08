@@ -6,7 +6,11 @@ export default {
 		'./.storybook/**/*.{js,jsx,ts,tsx}',
 	],
 	theme: {
-		extend: {},
+		extend: {
+			borderImage: {
+				'custom-dashed': 'dashed 6px',
+			},
+		},
 	},
 	plugins: [],
 };

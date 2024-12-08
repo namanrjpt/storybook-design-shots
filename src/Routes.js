@@ -1,7 +1,9 @@
 import TreeComponent from './Components/Tree/TreeComponent';
 import Filter from './Components/Advanced Filter/FinalRender/Filter';
-import NavbarFinal from './Components/Navigation Bar/Navbar-Final/NavbarFinal.jsx';
+import NavbarFinal from './Components/Navigation Bar/FinalRender/NavbarFinal.jsx';
 import AIChat from './Components/AI TextChat/Final/Final.jsx';
+import UploadModal from './Components/Upload Modal/Final/Final.jsx';
+
 // Internal Imports
 import Error from './Pages/Error';
 
@@ -38,7 +40,7 @@ export const routes = [
 		id: 6,
 		path: '/Upload-modal',
 		name: 'Upload Modal',
-		component: NavbarFinal,
+		component: UploadModal,
 	},
 	{
 		id: 100,

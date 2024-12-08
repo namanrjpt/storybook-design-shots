@@ -1,7 +1,7 @@
 import NavbarFinal from './NavbarFinal';
 
 export default {
-	title: 'Dribble Shots/Navbar/Navbar',
+	title: 'Dribble Shots/Navbar/Final Render',
 };
 
 export const FinalCard = (args) => (
