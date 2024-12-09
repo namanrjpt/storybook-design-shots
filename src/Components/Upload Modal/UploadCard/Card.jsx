@@ -8,9 +8,19 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { VscQuestion } from 'react-icons/vsc';
 import { RiFileList2Line } from 'react-icons/ri';
+import uploadImg from '../../../assets/img-upload.jpg';
+import {
+	CircularProgressbar,
+	buildStyles,
+} from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 const Card = () => {
 	const progressRef = useRef(null);
+	const [dragActive, setDragActive] =
+		useState(false);
+	const duration = 1000;
+	const [progress, setProgress] = useState(0);
 	const fileRef = useRef(null);
 
 	const [fileData, setFileData] = useState({
@@ -22,34 +32,82 @@ const Card = () => {
 		useState(null);
 
 	const pickFile = () => {
+		fileRef.current.value = '';
 		fileRef.current.click();
 	};
 
 	const filePicked = () => {
 		const file = fileRef.current.files[0];
-
 		setFileData({
 			title: file.name,
 			size: Math.round(file.size / 1048576),
 		});
-
 		setSelectedFile(file);
+	};
+
+	const handleDrag = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+
+		if (
+			e.type === 'dragenter' ||
+			e.type === 'dragover'
+		) {
+			setDragActive(true);
+		} else if (e.type === 'dragleave') {
+			setDragActive(false);
+		}
+	};
+
+	const handleDrop = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		setDragActive(false);
+
+		if (
+			e.dataTransfer.files &&
+			e.dataTransfer.files[0]
+		) {
+			setSelectedFile(e.dataTransfer.files[0]); // Process the dropped file
+			setFileData({
+				title: e.dataTransfer.files[0].name,
+				size: Math.round(
+					e.dataTransfer.files[0].size / 1048576
+				),
+			});
+		}
 	};
 
 	useGSAP(
 		() => {
 			if (selectedFile) {
+				setProgress(0);
 				gsap.to(progressRef.current, {
 					width: '100%',
 					duration: 1,
 					ease: 'power2.inOut',
 				});
+				setInterval(() => {
+					if (progress <= 100) {
+						setProgress((prev) => {
+							if (prev < 100) {
+								return prev + 1;
+							} else {
+								return 100;
+							}
+						});
+					}
+				}, duration / 100);
 			}
 		},
 		{
 			dependencies: [selectedFile],
 		}
 	);
+
+	const onDragOver = (e) => {
+		e.preventDefault();
+	};
 
 	return (
 		<div className='h-auto w-[33%] border bg-white rounded-2xl p-4 relative'>
@@ -69,10 +127,16 @@ const Card = () => {
 			<div
 				className='mt-5 w-full p-3 h-[15rem] flex flex-col items-center justify-center'
 				style={{
-					border: '4px dashed #0000001a',
+					border: dragActive
+						? '4px dashed #7939EF'
+						: '4px dashed #0000001a',
 					borderRadius: '1rem',
 				}}
 				onClick={pickFile}
+				onDragEnter={handleDrag}
+				onDragOver={handleDrag}
+				onDragLeave={handleDrag}
+				onDrop={handleDrop}
 			>
 				<input
 					className='hidden'
@@ -81,7 +145,28 @@ const Card = () => {
 					ref={fileRef}
 					onChange={filePicked}
 				/>
-				<div className='rounded-full aspect-square w-[7rem] border' />
+				<div className='rounded-full aspect-square w-[7rem] border'>
+					{selectedFile ? (
+						<CircularProgressbar
+							value={progress}
+							text={`${progress}%`}
+							strokeWidth={6}
+							styles={buildStyles({
+								pathColor: '#7939EF',
+								trailColor: 'lightgray',
+								textColor: '#000',
+								textSize: '1.5rem',
+								fontWeight: 'bold',
+							})}
+						/>
+					) : (
+						<img
+							className='rounded-full aspect-square w-full h-full object-cover'
+							src={uploadImg}
+							alt=''
+						/>
+					)}
+				</div>
 				<p className='mt-5 text-black font-semibold'>
 					Drag CSV here
 				</p>
@@ -97,25 +182,57 @@ const Card = () => {
 				</span>
 			</p>
 			{selectedFile && (
-				<div className='overflow-hidden w-full rounded-xl my-5 p-3 border border-black/10 flex items-center gap-3'>
+				<div className='overflow-hidden w-full rounded-xl my-5 p-3 border border-black/10 flex gap-3 relative items-stretch'>
 					<div className='flex items-center rounded-lg justify-center p-3 border border-black/10'>
 						<RiFileList2Line size={20} />
 					</div>
 					<div className='w-full flex flex-col items-start justify-center gap-2'>
-						<p className='font-bold text-base'>
-							{fileData.title} ({fileData.size} MB)
+						<p
+							className='font-bold text-base line-clamp-1 max-w-[90%]'
+							title={`${fileData.title} 
+							${
+								fileData.size <= 0
+									? '<0.5 MB'
+									: fileData.size + ' MB'
+							}`}
+						>
+							{fileData.title} (
+							{fileData.size <= 0
+								? '<0.5'
+								: fileData.size}{' '}
+							MB)
 						</p>
 						<div
 							ref={progressRef}
 							className='h-2 rounded-full w-0 bg-[#7939EF]'
 						/>
 					</div>
-					{/* <p className='w-[2rem]'>
-						{
-							progressRef.current?.getBoundingClientRect()
-								.width
-						}
-					</p> */}
+					<div className='flex items-end'>
+						<p className='text-sm font-semibold text-black/70'>
+							{progress}%
+						</p>
+					</div>
+					<div
+						className='absolute top-1 right-1 bg-black/10 p-1 rounded-lg hover:bg-black/20 hover:cursor-pointer transition-all'
+						onClick={() => {
+							setSelectedFile(null);
+							setFileData({
+								title: '',
+								size: '',
+							});
+							setProgress(0);
+							gsap.to(progressRef.current, {
+								width: '0%',
+								duration: 0.5,
+								ease: 'power2.inOut',
+							});
+						}}
+					>
+						<IoMdClose
+							size={15}
+							className='text-black/60'
+						/>
+					</div>
 				</div>
 			)}
 			<div className='w-full flex items-center justify-center mt-5 overflow-hidden'>
@@ -155,7 +272,22 @@ const Card = () => {
 					</p>
 				</div>
 				<div className='flex items-center justify-center gap-2'>
-					<button className='rounded-xl border-black/20 border p-3 px-5 bg-white text-black font-bold active:scale-90 transition-all'>
+					<button
+						className='rounded-xl border-black/20 border p-3 px-5 bg-white text-black font-bold active:scale-90 transition-all'
+						onClick={() => {
+							setSelectedFile(null);
+							setFileData({
+								title: '',
+								size: '',
+							});
+							setProgress(0);
+							gsap.to(progressRef.current, {
+								width: '0%',
+								duration: 0.5,
+								ease: 'power2.inOut',
+							});
+						}}
+					>
 						Discard
 					</button>
 					<button className='rounded-xl border-black/20 border p-3 px-5 bg-[#7939EF] text-white font-bold active:scale-90 transition-all'>
