@@ -58,7 +58,7 @@ const Final = () => {
 
 				tl
 					.to('.main', {
-						duration: 1,
+						duration: 0.3,
 						bottom: 0,
 						height: '20rem',
 					})
