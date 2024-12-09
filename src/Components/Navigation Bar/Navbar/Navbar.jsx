@@ -136,7 +136,7 @@ const Navbar = () => {
 							{item.subItems?.length > 0 && (
 								<HiOutlineChevronUp
 									style={
-										item.selected
+										!item.selected
 											? { transform: 'rotate(180deg)' }
 											: {}
 									}
