@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
 	motion,
 	AnimatePresence,
@@ -17,6 +17,26 @@ const ComponentFour = ({ moveNext }) => {
 	const handleNext = () => {
 		moveNext(4);
 	};
+
+	const handleKeyDown = (e) => {
+		if (e.key === 'Enter') {
+			handleNext();
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener(
+			'keydown',
+			handleKeyDown
+		);
+
+		return () => {
+			document.removeEventListener(
+				'keydown',
+				handleKeyDown
+			);
+		};
+	}, []);
 
 	const productList = [
 		{

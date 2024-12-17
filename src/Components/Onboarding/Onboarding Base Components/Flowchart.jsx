@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+import React from 'react';
 import woocom from '../../../assets/Onboarding/woo.png';
 import shopify from '../../../assets/Onboarding/shopify.png';
 import salesforce from '../../../assets/Onboarding/salesforce.png';
@@ -8,7 +6,6 @@ import bigcom from '../../../assets/Onboarding/bigcom.png';
 import magento from '../../../assets/Onboarding/magento.png';
 
 const Flowchart = ({ tagname }) => {
-	console.log(tagname);
 	const icons = [
 		{
 			id: 'shopify',

@@ -2,7 +2,7 @@ import {
 	motion,
 	AnimatePresence,
 } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IoChevronBack } from 'react-icons/io5';
 import { HiOutlineReply } from 'react-icons/hi';
 import { Radio, ConfigProvider } from 'antd';
@@ -17,14 +17,50 @@ const ComponentThree = ({ moveNext }) => {
 		moveNext(1);
 	};
 
+	useEffect(() => {
+		document.removeEventListener(
+			'keydown',
+			handleKeyDown
+		);
+		document.addEventListener(
+			'keydown',
+			handleKeyDown
+		);
+	}, [selectedIcon]);
+
 	const handleNext = () => {
 		if (selectedIcon === '') return;
+		document.removeEventListener(
+			'keydown',
+			handleKeyDown
+		);
 		moveNext(3);
 	};
 
 	const handleCheck = (e) => {
 		setSelectedIcon(e.target.value);
 	};
+
+	const handleKeyDown = (e) => {
+		if (e.key === 'Enter') {
+			console.log('Enter');
+			handleNext();
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener(
+			'keydown',
+			handleKeyDown
+		);
+
+		return () => {
+			document.removeEventListener(
+				'keydown',
+				handleKeyDown
+			);
+		};
+	}, []);
 
 	return (
 		<div className='h-3/4 w-full flex items-center justify-center px-[5rem]'>

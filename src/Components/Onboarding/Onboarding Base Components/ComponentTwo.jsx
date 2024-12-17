@@ -1,6 +1,6 @@
 import React, {
 	useState,
-	useCallback,
+	useEffect,
 } from 'react';
 import { useGSAP } from '@gsap/react';
 import { IoChevronBack } from 'react-icons/io5';
@@ -131,6 +131,43 @@ const ComponentTwo = ({ moveNext }) => {
 			});
 	});
 
+	useEffect(() => {
+		console.log(step);
+		document.removeEventListener(
+			'keydown',
+			handleKeyDown
+		);
+		document.addEventListener(
+			'keydown',
+			handleKeyDown
+		);
+	}, [step]);
+
+	const handleKeyDown = (e) => {
+		if (e.key === 'Enter') {
+			if (step == 1) {
+				setStep(2);
+			} else if (step == 2) {
+				setStep(3);
+			} else {
+				document.removeEventListener(
+					'keydown',
+					handleKeyDown
+				);
+				moveNext(2);
+			}
+		}
+	};
+
+	useEffect(() => {
+		return () => {
+			document.removeEventListener(
+				'keydown',
+				handleKeyDown
+			);
+		};
+	}, []);
+
 	return (
 		<div className='h-3/4 w-full flex items-center justify-center px-[5rem]'>
 			<div className='w-full h-full'>
@@ -161,6 +198,7 @@ const ComponentTwo = ({ moveNext }) => {
 								</p>
 								<div className='flex justify-start items-center my-3'>
 									<input
+										autoFocus
 										className='text-black font-bold bg-transparent font-base text-5xl w-[80%] py-3 outline-none text-left placeholder:font-normal placeholder:text-black/25 caret-blue-700 '
 										type='text'
 										placeholder='type here'
@@ -220,6 +258,7 @@ const ComponentTwo = ({ moveNext }) => {
 								</p>
 								<div className='flex justify-start items-center my-3'>
 									<input
+										autoFocus
 										className='text-black font-bold bg-transparent font-base text-5xl w-[80%] py-3 outline-none text-left placeholder:font-normal placeholder:text-black/25 caret-blue-700 '
 										type='text'
 										placeholder='type here'
@@ -283,10 +322,10 @@ const ComponentTwo = ({ moveNext }) => {
 										https://
 									</p>
 									<input
+										autoFocus
 										className='text-black font-semibold bg-transparent font-base text-5xl w-[80%] py-3 outline-none text-left placeholder:font-normal placeholder:text-black/25 caret-blue-700 pl-2'
 										type='text'
 										placeholder=''
-										autoFocus
 										onChange={(e) => {
 											setData({
 												...data,

@@ -20,7 +20,7 @@ import ComponentFive from './ComponentFive';
 const Screen = () => {
 	const progressRef = useRef(null);
 	const [progress, setProgress] = useState(10);
-	const [step, setStep] = useState(3);
+	const [step, setStep] = useState(1);
 
 	const handleNext = (step) => {
 		setStep(step + 1);
@@ -53,29 +53,6 @@ const Screen = () => {
 	}, [step]);
 
 	const RenderComponent = () => {
-		let component = null;
-		if (step === 1) {
-			component = (
-				<ComponentOne moveNext={handleNext} />
-			);
-		} else if (step === 2) {
-			component = (
-				<ComponentTwo moveNext={handleNext} />
-			);
-		} else if (step === 3) {
-			component = (
-				<ComponentThree moveNext={handleNext} />
-			);
-		} else if (step === 4) {
-			component = (
-				<ComponentFour moveNext={handleNext} />
-			);
-		} else if (step === 5) {
-			component = (
-				<ComponentFive moveNext={handleNext} />
-			);
-		}
-
 		return (
 			<AnimatePresence>
 				<motion.div
@@ -88,7 +65,19 @@ const Screen = () => {
 					}} // Smooth transition
 					className='h-full w-full'
 				>
-					{component}
+					{step == 1 && (
+						<ComponentOne moveNext={handleNext} />
+					)}
+					{step == 2 && (
+						<ComponentTwo moveNext={handleNext} />
+					)}
+					{step == 3 && (
+						<ComponentThree moveNext={handleNext} />
+					)}
+					{step == 4 && (
+						<ComponentFour moveNext={handleNext} />
+					)}
+					{step == 5 && <ComponentFive />}
 				</motion.div>
 			</AnimatePresence>
 		);

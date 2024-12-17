@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, {
+	useState,
+	useEffect,
+} from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import signupImage from '../../../assets/Onboarding/signup1.svg';
@@ -84,6 +87,26 @@ const ComponentOne = ({ moveNext }) => {
 			dependencies: [nextClicked],
 		}
 	);
+
+	const handleKeyDown = (e) => {
+		if (e.key === 'Enter') {
+			handleNext();
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener(
+			'keydown',
+			handleKeyDown
+		);
+
+		return () => {
+			document.removeEventListener(
+				'keydown',
+				handleKeyDown
+			);
+		};
+	}, []);
 
 	return (
 		<div className='component1 h-full w-full p-1 flex items-center justify-center'>

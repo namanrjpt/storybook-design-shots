@@ -2,25 +2,8 @@ import {
 	motion,
 	AnimatePresence,
 } from 'framer-motion';
-import { useState } from 'react';
-import { IoChevronBack } from 'react-icons/io5';
-import { HiOutlineReply } from 'react-icons/hi';
-import { Radio, ConfigProvider } from 'antd';
 
-import FlowChart from './Flowchart';
-
-const ComponentThree = ({ moveNext }) => {
-	const [selectedIcon, setSelectedIcon] =
-		useState('shopify');
-
-	const handleBack = () => {
-		setStep(2);
-	};
-
-	const handleNext = () => {
-		moveNext(4);
-	};
-
+const ComponentThree = () => {
 	return (
 		<div className='h-3/4 w-full flex items-center justify-center px-[5rem]'>
 			<div className='w-full h-full'>
@@ -93,7 +76,6 @@ const ComponentThree = ({ moveNext }) => {
 								ease: 'easeInOut',
 							}}
 							class='px-10 py-3 text-white font-medium rounded-full bg-gradient-to-r from-purple-500 to-blue-500 shadow-md hover:shadow-lg'
-							onClick={handleNext}
 						>
 							Book A Demo
 						</motion.button>
