@@ -10,6 +10,18 @@ export default {
 			borderImage: {
 				'custom-dashed': 'dashed 6px',
 			},
+			keyframes: {
+				blink: {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0' },
+				},
+			},
+			animation: {
+				blink: 'blink 1s steps(2) infinite',
+			},
+			fontFamily: {
+				outfit: ['Outfit', 'serif'],
+			},
 		},
 	},
 	plugins: [],

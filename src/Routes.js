@@ -6,6 +6,8 @@ import UploadModal from './Components/Upload Modal/Final/Final.jsx';
 
 // Internal Imports
 import Error from './Pages/Error';
+import Final from './Components/Onboarding/Final/Final.jsx';
+import Sidebar from './Components/Sidebar/Sidebar/Sidebar.jsx';
 
 export const routes = [
 	{
@@ -41,6 +43,18 @@ export const routes = [
 		path: '/Upload-modal',
 		name: 'Upload Modal',
 		component: UploadModal,
+	},
+	{
+		id: 6,
+		path: '/onboarding-screen',
+		name: 'Onboarding Screen',
+		component: Final,
+	},
+	{
+		id: 6,
+		path: '/sidebar',
+		name: 'Sidebar',
+		component: Sidebar,
 	},
 	{
 		id: 100,
