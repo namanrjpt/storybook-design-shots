@@ -38,7 +38,7 @@ const Flowchart = ({ tagname }) => {
 		<div className='h-full w-full flex items-center justify-end bg-white'>
 			<div className='w-[80%] h-full flex items-center justify-center gap-8'>
 				<div
-					className={`rounded-full border border-black/10 h-[5rem] p-3 w-[5rem] flex items-center justify-center transition-all ${
+					className={`rounded-full aspect-square border border-black/10 h-[5rem] p-3 w-[5rem] flex items-center justify-center transition-all ${
 						tagname == 'shopify'
 							? 'border border-blue-300 scale-150'
 							: ''
@@ -53,7 +53,7 @@ const Flowchart = ({ tagname }) => {
 					/>
 				</div>
 				<div
-					className={`rounded-full border border-black/10 h-[5rem] p-3 w-[5rem] flex items-center justify-center transition-all ${
+					className={`rounded-full aspect-square border border-black/10 h-[5rem] p-3 w-[5rem] flex items-center justify-center transition-all ${
 						tagname == 'magento'
 							? 'border border-blue-300 scale-150'
 							: ''
@@ -68,7 +68,7 @@ const Flowchart = ({ tagname }) => {
 					/>
 				</div>
 				<div
-					className={`rounded-full border border-black/10 h-[5rem] p-3 w-[5rem] flex items-center justify-center transition-all ${
+					className={`rounded-full aspect-square border border-black/10 h-[5rem] p-3 w-[5rem] flex items-center justify-center transition-all ${
 						tagname == 'woocommerce'
 							? 'border border-blue-300 scale-150'
 							: ''
@@ -83,7 +83,7 @@ const Flowchart = ({ tagname }) => {
 					/>
 				</div>
 				<div
-					className={`rounded-full border border-black/10 h-[5rem] p-3 w-[5rem] flex items-center justify-center transition-all ${
+					className={`rounded-full aspect-square border border-black/10 h-[5rem] p-3 w-[5rem] flex items-center justify-center transition-all ${
 						tagname == 'bigcommerce'
 							? 'border border-blue-300 scale-150'
 							: ''
@@ -99,7 +99,7 @@ const Flowchart = ({ tagname }) => {
 					/>
 				</div>
 				<div
-					className={`rounded-full border border-black/10 h-[5rem] p-3 w-[5rem] flex items-center justify-center transition-all ${
+					className={`rounded-full aspect-square border border-black/10 h-[5rem] p-3 w-[5rem] flex items-center justify-center transition-all ${
 						tagname == 'salesforce'
 							? 'border border-blue-300 scale-150'
 							: ''
