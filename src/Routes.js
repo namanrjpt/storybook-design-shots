@@ -3,6 +3,7 @@ import Filter from './Components/Advanced Filter/FinalRender/Filter';
 import NavbarFinal from './Components/Navigation Bar/FinalRender/NavbarFinal.jsx';
 import AIChat from './Components/AI TextChat/Final/Final';
 import UploadModal from './Components/Upload Modal/Final/Final.jsx';
+import KanbanFinal from './Components/Kanban View/Final/KanbanFinal.jsx';
 
 // Internal Imports
 import Error from './Pages/Error';
@@ -45,16 +46,22 @@ export const routes = [
 		component: UploadModal,
 	},
 	{
-		id: 6,
+		id: 7,
 		path: '/onboarding-screen',
 		name: 'Onboarding Screen',
 		component: Final,
 	},
 	{
-		id: 6,
+		id: 8,
 		path: '/sidebar',
 		name: 'Sidebar',
 		component: Sidebar,
+	},
+	{
+		id: 8,
+		path: '/kanban-view',
+		name: 'Kanban View',
+		component: KanbanFinal,
 	},
 	{
 		id: 100,

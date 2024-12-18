@@ -104,9 +104,6 @@ const Sidebar = () => {
 			gsap.to(mainMenuRef.current, {
 				width: '6vw',
 				duration: 0.5,
-				onComplete: () => {
-					setFullyAnimated(true);
-				},
 			});
 		} else {
 			gsap.to(mainMenuRef.current, {
@@ -123,21 +120,60 @@ const Sidebar = () => {
 					className={styles.sidebar}
 					ref={mainMenuRef}
 				>
-					<div className={styles.topBar}>
-						{!isSidebarCollapsed && (
-							<BsFillHexagonFill />
-						)}
-						<div
-							className={styles.sidebarIcon}
-							onClick={() =>
-								setIsSidebarCollapsed(!isSidebarCollapsed)
-							}
+					<motion.div
+						initial={{
+							justifyContent: 'space-between',
+						}}
+						animate={{
+							justifyContent: isSidebarCollapsed
+								? 'center'
+								: 'space-between',
+						}}
+						className={styles.topBar}
+					>
+						<AnimatePresence mode='popLayout'>
+							{!isSidebarCollapsed && (
+								<motion.span
+									initial={{
+										opacity: 0,
+										scale: 0,
+									}}
+									animate={{
+										opacity: 1,
+										scale: 1,
+									}}
+									exit={{
+										opacity: 0,
+										scale: 0,
+									}}
+								>
+									<BsFillHexagonFill />
+								</motion.span>
+							)}
+						</AnimatePresence>
+						<motion.div
+							initial={{
+								opacity: 0,
+								scale: 0,
+							}}
+							animate={{
+								opacity: 1,
+								scale: 1,
+							}}
+							exit={{
+								opacity: 0,
+								scale: 0,
+							}}
+							className={styles.sideIcon}
+							onClick={() => {
+								setIsSidebarCollapsed(
+									!isSidebarCollapsed
+								);
+							}}
 						>
-							<div className={styles.sideIcon}>
-								<PiSidebarSimpleFill />
-							</div>
-						</div>
-					</div>
+							<PiSidebarSimpleFill />
+						</motion.div>
+					</motion.div>
 					<div className={styles.itemWrapper}>
 						{menuItems.map((item, index) => (
 							<div
@@ -150,25 +186,42 @@ const Sidebar = () => {
 								className={styles.item}
 							>
 								{item.icon}
-								{!isSidebarCollapsed ? (
-									<>
-										<p>{item.title}</p>
-										{hoveredItem === item.title && (
-											<IoChevronForward
-												className={styles.arrow}
-											/>
-										)}
-									</>
-								) : (
-									<Tooltip
-										anchorSelect={`#${item.title}`}
-										place='right'
-										type='dark'
-										effect='solid'
-									>
-										<span>{item.title}</span>
-									</Tooltip>
-								)}
+								<AnimatePresence>
+									{!isSidebarCollapsed ? (
+										<>
+											<motion.p
+												initial={{
+													opacity: 0,
+												}}
+												animate={{
+													opacity: 1,
+												}}
+												exit={{
+													opacity: 0,
+												}}
+												transition={{
+													ease: 'easeInOut',
+												}}
+											>
+												{item.title}
+											</motion.p>
+											{hoveredItem === item.title && (
+												<IoChevronForward
+													className={styles.arrow}
+												/>
+											)}
+										</>
+									) : (
+										<Tooltip
+											anchorSelect={`#${item.title}`}
+											place='right'
+											type='dark'
+											effect='solid'
+										>
+											<span>{item.title}</span>
+										</Tooltip>
+									)}
+								</AnimatePresence>
 							</div>
 						))}
 					</div>
@@ -177,38 +230,91 @@ const Sidebar = () => {
 							src='https://img.freepik.com/free-photo/young-man-sad-expression_1194-2826.jpg'
 							alt=''
 						/>
-						{!isSidebarCollapsed && (
-							<>
-								<div className={styles.accountTitleInfo}>
-									<p>Kohaku</p>
-									<p>@kohaku</p>
-								</div>
-								<div className={styles.menuIcon}>
-									<IoIosMore
-										onClick={() => {
-											setIsMenuClicked(!isMenuClicked);
+						<AnimatePresence mode='popLayout'>
+							{!isSidebarCollapsed && (
+								<>
+									<motion.div
+										initial={{
+											opacity: 0,
 										}}
-									/>
-									{isMenuClicked && (
-										<div className={styles.hoverIcons}>
-											<div className={styles.icon}>
-												<PiSlidersHorizontalBold />
+										animate={{
+											opacity: 1,
+										}}
+										exit={{
+											opacity: 0,
+										}}
+										className={styles.accountTitleInfo}
+									>
+										<p>Kohaku</p>
+										<p>@kohaku</p>
+									</motion.div>
+									<motion.div
+										initial={{
+											opacity: 0,
+										}}
+										animate={{
+											opacity: 1,
+										}}
+										exit={{
+											opacity: 0,
+										}}
+										className={styles.menuIcon}
+									>
+										<IoIosMore
+											onClick={() => {
+												setIsMenuClicked(!isMenuClicked);
+											}}
+										/>
+										{isMenuClicked && (
+											<div className={styles.hoverIcons}>
+												<div className={styles.icon}>
+													<PiSlidersHorizontalBold />
+												</div>
+												<div className={styles.icon}>
+													<HiOutlineLogout />
+												</div>
 											</div>
-											<div className={styles.icon}>
-												<HiOutlineLogout />
-											</div>
-										</div>
-									)}
-								</div>
-							</>
-						)}
+										)}
+									</motion.div>
+								</>
+							)}
+						</AnimatePresence>
 					</div>
 					<div className={styles.postButton}>
-						{isSidebarCollapsed ? (
-							<IoAdd />
-						) : (
-							<p>Post</p>
-						)}
+						<AnimatePresence>
+							{isSidebarCollapsed ? (
+								<motion.span
+									initial={{
+										opacity: 0,
+										scale: 0,
+									}}
+									animate={{
+										opacity: 1,
+										scale: 1,
+									}}
+									exit={{
+										opacity: 0,
+										scale: 0,
+									}}
+								>
+									<IoAdd />
+								</motion.span>
+							) : (
+								<motion.p
+									initial={{
+										opacity: 0,
+									}}
+									animate={{
+										opacity: 1,
+									}}
+									exit={{
+										opacity: 0,
+									}}
+								>
+									Post
+								</motion.p>
+							)}
+						</AnimatePresence>
 					</div>
 				</div>
 			</AnimatePresence>

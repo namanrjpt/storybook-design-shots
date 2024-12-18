@@ -21,34 +21,27 @@
 			align-items: center;
 			justify-content: space-between;
 
-			> svg {
-				cursor: pointer;
-				color: #454545;
-				font-size: 2.5rem;
+			> span {
+				> svg {
+					cursor: pointer;
+					color: #454545;
+					font-size: 2.5rem;
+				}
 			}
 
-			> .sidebarIcon {
-				cursor: pointer;
-				width: 100%;
+			> .sideIcon {
 				display: flex;
 				align-items: center;
-				justify-content: flex-end;
-				padding: 0.5rem;
+				justify-content: center;
 				border-radius: 100%;
+				padding: 0.5rem;
+				box-shadow: 0 0 10px 0.25rem #e6e6e61a;
+				border: 1px solid #ffffff1b;
+				cursor: pointer;
 
-				> .sideIcon {
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					border-radius: 100%;
-					padding: 0.5rem;
-					box-shadow: 0 0 10px 0.25rem #e6e6e61a;
-					border: 1px solid #ffffff1b;
-
-					> svg {
-						font-size: 1.5rem;
-						color: #ffffffa8;
-					}
+				> svg {
+					font-size: 1.5rem;
+					color: #ffffffa8;
 				}
 			}
 		}
@@ -236,9 +229,11 @@
 				font-size: 1.15rem;
 			}
 
-			> svg {
-				font-size: 1.5rem;
-				color: #ffffffa8;
+			> span {
+				> svg {
+					font-size: 1.5rem;
+					color: #ffffffa8;
+				}
 			}
 
 			&:hover {
