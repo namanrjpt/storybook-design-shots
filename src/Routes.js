@@ -1,13 +1,13 @@
 import TreeComponent from './Components/Tree/TreeComponent';
 import Filter from './Components/Advanced Filter/FinalRender/Filter';
 import NavbarFinal from './Components/Navigation Bar/FinalRender/NavbarFinal.jsx';
-import AIChat from './Components/AI TextChat/Final/Final.jsx';
+import AIChat from './Components/AI TextChat/Final/Final';
 import UploadModal from './Components/Upload Modal/Final/Final.jsx';
 
 // Internal Imports
 import Error from './Pages/Error';
-import Final from './Components/Onboarding/Final/Final.jsx';
-import Sidebar from './Components/Sidebar/Sidebar/Sidebar.jsx';
+import Final from './Components/Onboarding/Final/Final';
+import Sidebar from './Components/Sidebar/Final/Sidebar';
 
 export const routes = [
 	{
