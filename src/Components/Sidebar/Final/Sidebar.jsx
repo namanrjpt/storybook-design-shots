@@ -214,9 +214,12 @@ const Sidebar = () => {
 									) : (
 										<Tooltip
 											anchorSelect={`#${item.title}`}
+											style={{
+												backgroundColor: '#181818',
+												borderRadius: '10px',
+											}}
 											place='right'
-											type='dark'
-											effect='solid'
+											offset='10'
 										>
 											<span>{item.title}</span>
 										</Tooltip>
