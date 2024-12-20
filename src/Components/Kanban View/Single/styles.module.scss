@@ -1,9 +1,105 @@
 .main {
-	height: 30rem;
-	aspect-ratio: 1;
+	width: 100%;
 	display: flex;
 	align-items: center;
-	justify-content: center;
 	flex-direction: column;
-	border: 1px solid black;
+	border: 1px solid #ffffff1a;
+	border-radius: 1rem;
+	padding: 1rem;
+	background-color: #212121;
+
+	> .header {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 1px solid #ffffff1b;
+		padding-bottom: 0.75rem;
+	}
+
+	> .innerContent {
+		width: 100%;
+		margin-top: 0.75rem;
+		display: flex;
+		align-items: flex-start;
+		justify-content: flex-start;
+		flex-direction: column;
+		gap: 1.25rem;
+		padding-bottom: 3rem;
+
+		> .item {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			gap: 0.75rem;
+
+			> svg {
+				color: rgba(255, 255, 255, 0.488);
+				font-size: 1.25rem;
+			}
+
+			> p {
+				font-weight: 300;
+				font-size: 1.2rem;
+				color: #ffffff;
+			}
+		}
+	}
+
+	> .bottomCard {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 0.5rem;
+
+		> .bottomCardLeft {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 1.2rem;
+
+			> svg {
+				color: rgba(255, 255, 255, 0.488);
+				font-size: 1rem;
+			}
+
+			> span {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.4rem;
+
+				> p {
+					font-weight: 300;
+					font-size: 0.85rem;
+					color: #ffffff;
+				}
+
+				> svg {
+					color: rgba(255, 255, 255, 0.488);
+					font-size: 1.25rem;
+				}
+			}
+		}
+
+		> .bottomCardRight {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0.5rem;
+
+			> svg {
+				color: rgba(255, 255, 255, 0.488);
+				font-size: 1rem;
+			}
+
+			> p {
+				font-weight: 300;
+				font-size: 0.8rem;
+				color: #ffffff;
+			}
+		}
+	}
 }
