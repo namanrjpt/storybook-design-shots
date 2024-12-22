@@ -4,6 +4,8 @@ import NavbarFinal from './Components/Navigation Bar/FinalRender/NavbarFinal.jsx
 import AIChat from './Components/AI TextChat/Final/Final';
 import UploadModal from './Components/Upload Modal/Final/Final.jsx';
 import KanbanFinal from './Components/Kanban View/Final/KanbanFinal.jsx';
+import MapCard from './Components/Map card/Final/FinalMap.jsx';
+import SwapFinal from './Components/Swap Animation/Final/SwapFinal.jsx';
 
 // Internal Imports
 import Error from './Pages/Error';
@@ -58,10 +60,22 @@ export const routes = [
 		component: Sidebar,
 	},
 	{
-		id: 8,
+		id: 9,
 		path: '/kanban-view',
 		name: 'Kanban View',
 		component: KanbanFinal,
+	},
+	{
+		id: 10,
+		path: '/map-card',
+		name: 'Map Card',
+		component: MapCard,
+	},
+	{
+		id: 11,
+		path: '/swap-animation',
+		name: 'Swap Animation',
+		component: SwapFinal,
 	},
 	{
 		id: 100,
