@@ -32,6 +32,9 @@ const TextComponent = ({
 				placeholder='Search Anything'
 				value={text}
 				onChange={(e) => setText(e.target.value)}
+				onKeyDown={(e) => {
+					if (e.key === 'Enter') Submit();
+				}}
 			/>
 			<button
 				onClick={Submit}
