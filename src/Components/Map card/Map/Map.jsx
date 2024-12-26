@@ -29,7 +29,7 @@ const Map = () => {
 			resolver: {
 				resolverId: 'MTC001197',
 				position: [51.505393, -0.084784], // Resolver position
-				color: 'red',
+				color: 'purple',
 				operator: 'John Doe',
 				description:
 					'John Doe is a very experienced resolver',
@@ -47,7 +47,7 @@ const Map = () => {
 			resolver: {
 				resolverId: 'MTC001198',
 				position: [51.502754, -0.090127], // Resolver position
-				color: 'red',
+				color: 'black',
 				operator: 'Jane Smith',
 				description:
 					'Jane Smith is a very experienced resolver',
@@ -83,7 +83,7 @@ const Map = () => {
 			resolver: {
 				resolverId: 'MTC001200',
 				position: [51.512, -0.097], // Resolver position
-				color: 'red',
+				color: 'yellow',
 				operator: 'Bob Brown',
 				description:
 					'Bob Brown is a very experienced resolver',
@@ -100,18 +100,6 @@ const Map = () => {
                 <span class="bg-blue-500 w-full h-full rounded-full block"> 
                 </span>
             </div>`,
-		iconSize: [30, 30],
-		iconAnchor: [15, 15],
-	});
-
-	const resolverIcon = new L.DivIcon({
-		className: 'leaflet-div-icon1',
-		html: `
-        <div class="w-8 h-8 text-red-500 flex items-center justify-center">
-        <svg stroke="currentColor" fill="currentcolor" stroke-width="4" viewBox="0 0 24 24" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.94607 9.31543C1.42353 9.14125 1.4194 8.86022 1.95682 8.68108L21.043 2.31901C21.5715 2.14285 21.8746 2.43866 21.7265 2.95694L16.2733 22.0432C16.1223 22.5716 15.8177 22.59 15.5944 22.0876L11.9999 14L17.9999 6.00005L9.99992 12L1.94607 9.31543Z"></path>
-        </svg>
-        </div>`,
 		iconSize: [30, 30],
 		iconAnchor: [15, 15],
 	});
@@ -133,8 +121,8 @@ const Map = () => {
 					styles: [
 						{
 							color: '#0088ff',
-							weight: 4,
-							opacity: 0.7,
+							weight: 3,
+							opacity: 1,
 							dashArray: '8, 8',
 						},
 					],
@@ -158,6 +146,14 @@ const Map = () => {
 		}, [map, waypoints]);
 
 		return null;
+	};
+
+	const calculateRotationAngle = (start, end) => {
+		const dx = end[1] - start[1];
+		const dy = end[0] - start[0];
+		const angle =
+			Math.atan2(dy, dx) * (180 / Math.PI); // Convert radians to degrees
+		return angle; // This gives the angle of rotation
 	};
 
 	return (
@@ -234,57 +230,95 @@ const Map = () => {
 				{/* Markers for the resolver */}
 				{data
 					.filter((item) => item.isResolverAssigned)
-					.map((item) => (
-						<Marker
-							position={item.resolver.position}
-							key={item.id}
-							icon={resolverIcon}
-							onClick={() => {
-								setData((prevData) =>
-									prevData.map((data) =>
-										data.id === item.id
-											? {
-													...data,
-													showRoute: !data.showRoute,
-											  }
-											: data
-									)
-								);
-							}}
-						>
-							<Popup>
-								<div className='flex flex-col'>
-									<div className='flex items-center justify-between'>
-										<h1 className='text-xl font-bold'>
-											{item.issue}
-										</h1>
-										<motion.div
-											initial={{ scale: 0 }}
-											animate={{ scale: 1 }}
-											exit={{ scale: 0 }}
-											transition={{ duration: 0.5 }}
-											className='bg-green-500 p-2 rounded-full'
-										>
-											<RiSendPlaneFill size={20} />
-										</motion.div>
-									</div>
-									<div className='flex items-center justify-between'>
-										<div className='flex items-center'>
-											<FaRegCircleDot size={20} />
-											<h1 className='text-lg font-bold'>
-												{item.resolver.operator}
+					.map((item) => {
+						const rotationAngle =
+							calculateRotationAngle(
+								item.resolver.position,
+								item.position
+							);
+
+						// Create a custom DivIcon for the resolver marker with rotation applied
+						const rotatedResolverIcon = new L.DivIcon({
+							className: 'leaflet-div-icon-rotated',
+							html: `
+        <div
+          style="
+            transform: rotate(${rotationAngle}deg);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+			color: ${item.resolver.color};
+          "
+        >
+          <svg stroke="currentColor" fill="currentColor" stroke-width="4" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.94607 9.31543C1.42353 9.14125 1.4194 8.86022 1.95682 8.68108L21.043 2.31901C21.5715 2.14285 21.8746 2.43866 21.7265 2.95694L16.2733 22.0432C16.1223 22.5716 15.8177 22.59 15.5944 22.0876L11.9999 14L17.9999 6.00005L9.99992 12L1.94607 9.31543Z"></path>
+          </svg>
+        </div>
+      `,
+							iconSize: [30, 30],
+							iconAnchor: [15, 15], // Center of the icon
+						});
+
+						return (
+							<Marker
+								position={item.resolver.position}
+								key={item.id}
+								icon={rotatedResolverIcon}
+								eventHandlers={{
+									click: () => {
+										setData((prevData) => {
+											const updatedData = prevData.map(
+												(dataItem) => {
+													if (dataItem.id === item.id) {
+														return {
+															...dataItem,
+															showRoute: !dataItem.showRoute,
+														};
+													}
+													return dataItem;
+												}
+											);
+											return updatedData;
+										});
+									},
+								}}
+							>
+								<Popup>
+									<div className='flex flex-col'>
+										<div className='flex items-center justify-between'>
+											<h1 className='text-xl font-bold'>
+												{item.issue}
 											</h1>
+											<motion.div
+												initial={{ scale: 0 }}
+												animate={{ scale: 1 }}
+												exit={{ scale: 0 }}
+												transition={{ duration: 0.5 }}
+												className='bg-green-500 p-2 rounded-full'
+											>
+												<RiSendPlaneFill size={20} />
+											</motion.div>
 										</div>
-										<div className='flex items-center'>
-											<h1 className='text-lg font-bold'>
-												{item.resolver['Arrival Time']}
-											</h1>
+										<div className='flex items-center justify-between'>
+											<div className='flex items-center'>
+												<FaRegCircleDot size={20} />
+												<h1 className='text-lg font-bold'>
+													{item.resolver.operator}
+												</h1>
+											</div>
+											<div className='flex items-center'>
+												<h1 className='text-lg font-bold'>
+													{item.resolver['Arrival Time']}
+												</h1>
+											</div>
 										</div>
 									</div>
-								</div>
-							</Popup>
-						</Marker>
-					))}
+								</Popup>
+							</Marker>
+						);
+					})}
 
 				{/* Routing Machine */}
 				{data
