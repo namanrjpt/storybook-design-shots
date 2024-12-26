@@ -1,0 +1,9 @@
+.leaflet-popup-content{
+    margin: 0;
+    width: auto !important;
+    height: auto !important;
+}
+
+.leaflet-popup-content p {
+    margin: 0;
+}
