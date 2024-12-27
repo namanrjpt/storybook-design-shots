@@ -5,7 +5,7 @@ import AIChat from './Components/AI TextChat/Final/Final';
 import UploadModal from './Components/Upload Modal/Final/Final.jsx';
 import KanbanFinal from './Components/Kanban View/Final/KanbanFinal.jsx';
 import MapCard from './Components/Map card/Final/FinalMap.jsx';
-import SwapFinal from './Components/Swap Animation/Final/SwapFinal.jsx';
+import SwapFinal from './Components/Swap Animation/Card/Card.jsx';
 
 // Internal Imports
 import Error from './Pages/Error';

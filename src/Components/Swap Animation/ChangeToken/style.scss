@@ -1,0 +1,75 @@
+* {
+	--sb-track-color: #1e1e1e;
+	--sb-thumb-color: #ffffff;
+	--sb-size: 4px;
+}
+
+*::-webkit-scrollbar-track {
+	background: var(--sb-track-color);
+	border-radius: 1px;
+}
+
+*::-webkit-scrollbar-thumb {
+	background: var(--sb-thumb-color);
+	border-radius: 1px;
+}
+
+*::-webkit-scrollbar {
+	width: var(--sb-size);
+	height: var(--sb-size);
+}
+
+@supports not selector(::-webkit-scrollbar) {
+	* {
+		scrollbar-color: var(--sb-thumb-color)
+			var(--sb-track-color);
+	}
+}
+
+.gradient-border {
+	transition: all 0.3s ease-in-out;
+	background: linear-gradient(
+		90deg,
+		#c20000,
+		#188818
+	);
+	background-clip: border-box;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+.gradient-none {
+	transition: all 0.3s ease-in-out;
+	background: transparent;
+}
+
+.inner {
+	padding: 1rem;
+	border-radius: 0.75rem;
+	background-color: #1e1e1e;
+	color: white;
+	font-size: 1.5rem;
+	font-weight: 600;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%;
+	width: 98%;
+	margin: 1px;
+}
+
+
+.token {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	gap: 1rem;
+	background-color: black;
+	margin: 1px;
+	border-radius: .3rem;
+	padding: .5rem;
+}
