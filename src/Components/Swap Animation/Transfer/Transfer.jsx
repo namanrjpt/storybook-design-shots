@@ -14,6 +14,7 @@ import {
 	motion,
 	AnimatePresence,
 } from 'framer-motion';
+import gsap from 'gsap';
 
 const icons = {
 	bitcoin:
@@ -49,6 +50,7 @@ const dataCurrency = [
 ];
 
 const Transfer = () => {
+	const mainRef = useRef();
 	const prevPayerAmountRef = useRef();
 	const prevReceiverAmountRef = useRef();
 	const [changeToken, setChangeToken] =
@@ -146,8 +148,26 @@ const Transfer = () => {
 		}));
 	};
 
+	useEffect(() => {
+		if (changeToken == 'pay') {
+			gsap.to(mainRef.current, {
+				height: '75vh',
+				duration: 0.5,
+			});
+		}
+		if (changeToken == 'success') {
+			gsap.to(mainRef.current, {
+				height: '60vh',
+				duration: 0.5,
+			});
+		}
+	}, [changeToken]);
+
 	return (
-		<>
+		<div
+			ref={mainRef}
+			className='h-[60dvh] w-full flex items-center justify-center flex-col'
+		>
 			{changeToken == 'transfer' && (
 				<AnimatePresence>
 					<motion.div
@@ -155,6 +175,7 @@ const Transfer = () => {
 						animate={{ opacity: 1, scale: 1 }}
 						exit={{ opacity: 0, scale: 0.95 }}
 						transition={{ duration: 0.5 }}
+						className='h-full w-full'
 					>
 						<Token
 							data={getTokenData}
@@ -403,13 +424,30 @@ const Transfer = () => {
 				</AnimatePresence>
 			)}
 			{changeToken == 'success' && (
-				<Success
-					close={() => {
-						setChangeToken('pay');
-					}}
-				/>
+				<AnimatePresence>
+					<motion.div
+						initial={{
+							opacity: 0,
+						}}
+						animate={{
+							opacity: 1,
+						}}
+						exit={{
+							opacity: 0,
+						}}
+						transition={{
+							duration: 0.5,
+						}}
+					>
+						<Success
+							close={() => {
+								setChangeToken('pay');
+							}}
+						/>
+					</motion.div>
+				</AnimatePresence>
 			)}
-		</>
+		</div>
 	);
 };
 

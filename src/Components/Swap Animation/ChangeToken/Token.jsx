@@ -7,7 +7,6 @@ import { IoMdClose } from 'react-icons/io';
 import { IoSearchOutline } from 'react-icons/io5';
 import './style.scss';
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 
 const cryptocurrencies = [
 	{
@@ -51,7 +50,7 @@ const cryptocurrencies = [
 		symbol: 'FIDA',
 		network: 'Solana',
 		cryptoIcon:
-			'https://cryptologos.cc/logos/bonfida-fida-logo.png?v=025',
+			'https://pbs.twimg.com/profile_images/1638698903867383816/g3HOdy9J_400x400.png',
 		networkIcon:
 			'https://cryptologos.cc/logos/solana-sol-logo.png?v=025',
 	},
@@ -60,7 +59,7 @@ const cryptocurrencies = [
 		symbol: 'STEP',
 		network: 'Solana',
 		cryptoIcon:
-			'https://cryptologos.cc/logos/step-finance-step-logo.png?v=025',
+			'https://assets.coingecko.com/coins/images/14988/large/step.png?1696514652',
 		networkIcon:
 			'https://cryptologos.cc/logos/solana-sol-logo.png?v=025',
 	},
@@ -69,7 +68,7 @@ const cryptocurrencies = [
 		symbol: 'ATLAS',
 		network: 'Solana',
 		cryptoIcon:
-			'https://cryptologos.cc/logos/star-atlas-atlas-logo.png?v=025',
+			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXA0aHiilxe_5vU80ibgjRkG03ybn2YiHAnA&s',
 		networkIcon:
 			'https://cryptologos.cc/logos/solana-sol-logo.png?v=025',
 	},
@@ -81,60 +80,6 @@ const cryptocurrencies = [
 		network: 'Avalanche',
 		cryptoIcon:
 			'https://cryptologos.cc/logos/avalanche-avax-logo.png?v=025',
-		networkIcon:
-			'https://cryptologos.cc/logos/avalanche-avax-logo.png?v=025',
-	},
-	{
-		name: 'Trader Joe',
-		symbol: 'JOE',
-		network: 'Avalanche',
-		cryptoIcon:
-			'https://cryptologos.cc/logos/trader-joe-joe-logo.png?v=025',
-		networkIcon:
-			'https://cryptologos.cc/logos/avalanche-avax-logo.png?v=025',
-	},
-	{
-		name: 'Benqi',
-		symbol: 'QI',
-		network: 'Avalanche',
-		cryptoIcon:
-			'https://cryptologos.cc/logos/benqi-qi-logo.png?v=025',
-		networkIcon:
-			'https://cryptologos.cc/logos/avalanche-avax-logo.png?v=025',
-	},
-	{
-		name: 'Pangolin',
-		symbol: 'PNG',
-		network: 'Avalanche',
-		cryptoIcon:
-			'https://cryptologos.cc/logos/pangolin-png-logo.png?v=025',
-		networkIcon:
-			'https://cryptologos.cc/logos/avalanche-avax-logo.png?v=025',
-	},
-	{
-		name: 'Platypus',
-		symbol: 'PTP',
-		network: 'Avalanche',
-		cryptoIcon:
-			'https://cryptologos.cc/logos/platypus-ptp-logo.png?v=025',
-		networkIcon:
-			'https://cryptologos.cc/logos/avalanche-avax-logo.png?v=025',
-	},
-	{
-		name: 'Yield Yak',
-		symbol: 'YY',
-		network: 'Avalanche',
-		cryptoIcon:
-			'https://cryptologos.cc/logos/yield-yak-yy-logo.png?v=025',
-		networkIcon:
-			'https://cryptologos.cc/logos/avalanche-avax-logo.png?v=025',
-	},
-	{
-		name: 'Snowball',
-		symbol: 'SNOB',
-		network: 'Avalanche',
-		cryptoIcon:
-			'https://cryptologos.cc/logos/snowball-snob-logo.png?v=025',
 		networkIcon:
 			'https://cryptologos.cc/logos/avalanche-avax-logo.png?v=025',
 	},
@@ -168,38 +113,11 @@ const cryptocurrencies = [
 			'https://cryptologos.cc/logos/tron-trx-logo.png?v=025',
 	},
 	{
-		name: 'WINKLink',
-		symbol: 'WIN',
-		network: 'Tron',
-		cryptoIcon:
-			'https://cryptologos.cc/logos/wink-win-logo.png?v=025',
-		networkIcon:
-			'https://cryptologos.cc/logos/tron-trx-logo.png?v=025',
-	},
-	{
-		name: 'Sun Token',
-		symbol: 'SUN',
-		network: 'Tron',
-		cryptoIcon:
-			'https://cryptologos.cc/logos/sun-sun-logo.png?v=025',
-		networkIcon:
-			'https://cryptologos.cc/logos/tron-trx-logo.png?v=025',
-	},
-	{
 		name: 'BitTorrent',
 		symbol: 'BTT',
 		network: 'Tron',
 		cryptoIcon:
 			'https://cryptologos.cc/logos/bittorrent-btt-logo.png?v=025',
-		networkIcon:
-			'https://cryptologos.cc/logos/tron-trx-logo.png?v=025',
-	},
-	{
-		name: 'APENFT',
-		symbol: 'NFT',
-		network: 'Tron',
-		cryptoIcon:
-			'https://cryptologos.cc/logos/apenft-nft-logo.png?v=025',
 		networkIcon:
 			'https://cryptologos.cc/logos/tron-trx-logo.png?v=025',
 	},
@@ -296,15 +214,6 @@ const cryptocurrencies = [
 			'https://cryptologos.cc/logos/ethereum-eth-logo.png?v=025',
 	},
 	{
-		name: 'Wrapped Ethereum',
-		symbol: 'WETH',
-		network: 'Ethereum',
-		cryptoIcon:
-			'https://cryptologos.cc/logos/wrapped-ethereum-weth-logo.png?v=025',
-		networkIcon:
-			'https://cryptologos.cc/logos/ethereum-eth-logo.png?v=025',
-	},
-	{
 		name: 'USD Coin',
 		symbol: 'USDC',
 		network: 'Ethereum',
@@ -370,29 +279,11 @@ const cryptocurrencies = [
 			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuHVZiXbO3ml-_IyI9cWz9mf5lIzFYog-fRw&s',
 	},
 	{
-		name: 'Venus',
-		symbol: 'XVS',
-		network: 'Binance Smart Chain',
-		cryptoIcon:
-			'https://cryptologos.cc/logos/venus-xvs-logo.png?v=025',
-		networkIcon:
-			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuHVZiXbO3ml-_IyI9cWz9mf5lIzFYog-fRw&s',
-	},
-	{
 		name: 'BakeryToken',
 		symbol: 'BAKE',
 		network: 'Binance Smart Chain',
 		cryptoIcon:
 			'https://cryptologos.cc/logos/bakerytoken-bake-logo.png?v=025',
-		networkIcon:
-			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuHVZiXbO3ml-_IyI9cWz9mf5lIzFYog-fRw&s',
-	},
-	{
-		name: 'Ellipsis',
-		symbol: 'EPS',
-		network: 'Binance Smart Chain',
-		cryptoIcon:
-			'https://cryptologos.cc/logos/ellipsis-eps-logo.png?v=025',
 		networkIcon:
 			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuHVZiXbO3ml-_IyI9cWz9mf5lIzFYog-fRw&s',
 	},
@@ -412,7 +303,7 @@ const cryptocurrencies = [
 		symbol: 'QUICK',
 		network: 'Polygon',
 		cryptoIcon:
-			'https://cryptologos.cc/logos/quickswap-quick-logo.png?v=025',
+			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT-MmCaWRL5NSOlzWWx7DoiBPq7X7_YT7EbA&s',
 		networkIcon:
 			'https://cryptologos.cc/logos/polygon-matic-logo.png?v=025',
 	},
@@ -587,7 +478,7 @@ const Token = ({ data, close, requestedBy }) => {
 			</div>
 			<div
 				ref={currencyRef}
-				className='min-h-[20rem] w-full flex flex-col overflow-y-auto max-h-[20rem] gap-2 pr-3'
+				className='min-h-[20rem] w-full flex flex-col overflow-y-auto max-h-[20rem] gap-2 pr-3 pb-5'
 			>
 				{cryptocurrencies
 					.filter(
@@ -602,7 +493,7 @@ const Token = ({ data, close, requestedBy }) => {
 					.map((crypto) => (
 						<div
 							key={crypto.symbol}
-							className={`flex items-center gap-3 border border-white/10 rounded-lg cursor-pointer transition-all hover:shadow-lg ${
+							className={`flex items-start gap-3 border border-white/10 rounded-lg cursor-pointer transition-all hover:shadow-lg ${
 								selectedToken === crypto.symbol
 									? 'gradient-border'
 									: 'gradient-none'
