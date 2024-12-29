@@ -51,8 +51,6 @@ const dataCurrency = [
 
 const Transfer = () => {
 	const mainRef = useRef();
-	const prevPayerAmountRef = useRef();
-	const prevReceiverAmountRef = useRef();
 	const [changeToken, setChangeToken] =
 		useState('pay');
 	const [isEditing, setIsEditing] =
@@ -65,7 +63,7 @@ const Transfer = () => {
 	const [transferDetails, setTransferDetails] =
 		useState({
 			payer: {
-				amount: 0,
+				amount: '',
 				currency: 'USDT',
 				network: 'BNB',
 				icon: icons.tether,
@@ -73,7 +71,7 @@ const Transfer = () => {
 				transferRate: 1.25,
 			},
 			receiver: {
-				amount: 0,
+				amount: '',
 				name: 'Solana',
 				currency: 'SOL',
 				network: 'Solana',
@@ -242,7 +240,7 @@ const Transfer = () => {
 									</p>
 									<input
 										placeholder='0.00'
-										type='number'
+										type='text'
 										onChange={handlePayerAmountChange}
 										value={transferDetails.payer.amount}
 										className='bg-transparent outline-none text-white w-full p-2 text-2xl placeholder-white placeholder:font-normal'
@@ -260,7 +258,7 @@ const Transfer = () => {
 										<img
 											src={transferDetails.payer.icon}
 											alt=''
-											className='w-full h-full'
+											className='w-10 object-contain aspect-square rounded-full'
 										/>
 										<img
 											src={transferDetails.payer.networkIcon}
@@ -286,7 +284,7 @@ const Transfer = () => {
 									</p>
 									<input
 										placeholder='0.00'
-										type='number'
+										type='text'
 										onChange={handleReceiverAmountChange}
 										value={transferDetails.receiver.amount}
 										className='bg-transparent outline-none text-white w-full p-2 text-2xl placeholder-white placeholder:font-normal'
@@ -304,7 +302,7 @@ const Transfer = () => {
 										<img
 											src={transferDetails.receiver.icon}
 											alt=''
-											className='w-full h-full'
+											className='w-10 object-contain aspect-square rounded-full'
 										/>
 										<img
 											src={
