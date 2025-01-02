@@ -15,7 +15,7 @@ To get started with this project, follow these steps:
 1. **Clone the repository:**
     ```bash
     git clone https://github.com/namanrjpt/storybook-design-shots.git
-    cd storybook
+    cd storybook-design-shots
     ```
 
 2. **Install dependencies:**
