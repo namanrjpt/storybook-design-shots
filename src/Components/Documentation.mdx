@@ -7,7 +7,7 @@ import { Meta } from '@storybook/addon-docs';
 ## Overview
 This Storybook project provides a comprehensive environment for developing, testing, and showcasing UI components. It serves as a live documentation hub for all reusable components in the project. Storybook allows you to develop components in isolation, which improves component reusability and testability. It also provides a visual interface to browse and interact with your components, making it easier to understand and use them.
 
----
+![Storybook Example](./dribblexsb.svg)
 
 ## Getting Started
 
@@ -20,22 +20,60 @@ Before you begin, ensure you have met the following requirements:
 ### Installation
 To get started with this project, clone the repository and install the dependencies:
 
+```bash
+# Clone the repository
+git clone https://github.com/namanrjpt/storybook-design-shots.git
+
+# Navigate to the project directory
+cd storybook-design-shots
+
+# Install dependencies
+npm install
+```
+
 ### Running the Project
+There are two ways you can through which you can run this project.
+
+### For Storybook Server
 To run the Storybook server and view your components, use the following command:
 npm run storybook
 
+
+```bash
+    npm run storybook
+```
+
 This will start the Storybook server and open a new tab in your default web browser with the Storybook interface. You can now browse and interact with your components.
+
+### For React Development Server
+To run the React developmment server and view your components, use the following command:
+npm run dev
+
+```bash
+    npm run dev
+```
+
+This will start the default React developmment server and you can go to `http://localhost:5173/` (default port, change it accordingly) route to view all the listed components and can directly navigate to each single component from there itself.
 
 ### Project Structure
 The project structure is organized as follows:
 
+```
+src/
+└── Components/
+    └── Swap Animation/
+        └── Transfer/
+            ├── Transfer.jsx
+            └── Transfer.stories.jsx
+```
+
+The components are located in the `src/Components` directory. Each component has its own folder containing the component file and its corresponding stories file.
+
+
 ### Contributing
 To contribute to this project, follow these steps:
 1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
+2. Create a new branch (`git checkout -b master`).
 3. Make your changes and commit them (`git commit -m 'Add some feature'`).
-4. Push to the branch (`git push origin feature-branch`).
+4. Push to the branch (`git push origin master`).
 5. Create a pull request.
-
-### License
-This project is licensed under the MIT License. See the LICENSE file for more information.

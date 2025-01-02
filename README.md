@@ -2,6 +2,8 @@
 
 This project is a Storybook setup for developing and testing UI components in isolation. Storybook provides a convenient way to build, test, and showcase your components without having to run your entire application.
 
+![Storybook Example](./dribblexsb.svg)
+
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
