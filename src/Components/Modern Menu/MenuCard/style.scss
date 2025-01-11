@@ -1,0 +1,27 @@
+.menuItem {
+	transition: all 0.3s ease;
+	* {
+		transition: all 0.3s ease;
+	}
+	&:hover {
+		cursor: pointer;
+		background-color: #ffffff;
+
+		> div {
+			> p {
+				color: #000000;
+
+				&:focus {
+					color: #000000;
+				}
+			}
+		}
+
+		> .buttonUrl {
+			> svg {
+				color: black;
+				transform: rotate(-45deg);
+			}
+		}
+	}
+}

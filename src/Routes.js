@@ -11,6 +11,8 @@ import SwapFinal from './Components/Swap Animation/Card/Card.jsx';
 import Error from './Pages/Error';
 import Final from './Components/Onboarding/Final/Final';
 import Sidebar from './Components/Sidebar/Final/Sidebar';
+import ModernMenu from './Components/Modern Menu/Final/Final';
+import ModernFooter from './Components/Modern Footer/Final/Final';
 
 export const routes = [
 	{
@@ -76,6 +78,18 @@ export const routes = [
 		path: '/swap-animation',
 		name: 'Swap Animation',
 		component: SwapFinal,
+	},
+	{
+		id: 12,
+		path: '/modern-menu',
+		name: 'Modern Menu',
+		component: ModernMenu,
+	},
+	{
+		id: 13,
+		path: '/modern-footer',
+		name: 'Modern Footer',
+		component: ModernFooter,
 	},
 	{
 		id: 100,

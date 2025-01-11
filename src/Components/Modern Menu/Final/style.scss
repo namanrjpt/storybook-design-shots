@@ -1,0 +1,14 @@
+.item {
+    transition: all 0.3s;
+    * {
+        transition: all 0.3s;
+    }
+
+	&:hover {
+        cursor: pointer;
+        > svg {
+        
+            transform: rotate(45deg);
+        }
+	}
+}

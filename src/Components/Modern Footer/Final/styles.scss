@@ -1,0 +1,14 @@
+@font-face {
+	font-family: 'Signate';
+	src: url('../../../assets/Fonts/signate/signategrotesk-black.ttf')
+		format('truetype');
+	font-weight: 800;
+	font-style: normal;
+}
+
+.brandText {
+    
+    > * {
+        font-family: 'Signate', sans-serif !important;
+    }
+}
