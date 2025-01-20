@@ -1,0 +1,13 @@
+/* Target the calendar icon */
+.custom-datepicker .ant-picker-suffix {
+  color: #b3b3b3; /* Custom icon color */
+}
+
+.custom-datepicker:hover .ant-picker-suffix {
+  color: #ffffff; /* Icon color on hover */
+}
+
+/* Override the placeholder color of the DatePicker */
+.ant-picker-input input::placeholder {
+  color: #888 !important; /* Change this to your desired color */
+}

@@ -6,6 +6,7 @@ import UploadModal from './Components/Upload Modal/Final/Final.jsx';
 import KanbanFinal from './Components/Kanban View/Final/KanbanFinal.jsx';
 import MapCard from './Components/Map card/Final/FinalMap.jsx';
 import SwapFinal from './Components/Swap Animation/Card/Card.jsx';
+import MeetingModal from './Components/Meeting Modal/Final/Final.jsx'
 
 // Internal Imports
 import Error from './Pages/Error';
@@ -89,6 +90,24 @@ export const routes = [
 		id: 13,
 		path: '/modern-footer',
 		name: 'Modern Footer',
+		component: ModernFooter,
+	},
+	{
+		id: 14,
+		path: '/meeting-modal',
+		name: 'Meeting Modal',
+		component: MeetingModal,
+	},
+	{
+		id: 15,
+		path: '/booking-ui',
+		name: 'Booking UI',
+		component: ModernFooter,
+	},
+	{
+		id: 16,
+		path: '/modern-carousel',
+		name: 'Modern Carousel',
 		component: ModernFooter,
 	},
 	{
