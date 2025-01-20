@@ -7,6 +7,7 @@ import KanbanFinal from './Components/Kanban View/Final/KanbanFinal.jsx';
 import MapCard from './Components/Map card/Final/FinalMap.jsx';
 import SwapFinal from './Components/Swap Animation/Card/Card.jsx';
 import MeetingModal from './Components/Meeting Modal/Final/Final.jsx'
+import BookingUI from './Components/Booking UI/Final/Final.jsx'
 
 // Internal Imports
 import Error from './Pages/Error';
@@ -102,7 +103,7 @@ export const routes = [
 		id: 15,
 		path: '/booking-ui',
 		name: 'Booking UI',
-		component: ModernFooter,
+		component: BookingUI,
 	},
 	{
 		id: 16,
