@@ -10,12 +10,13 @@ const Final = () => {
       location: "Online",
       infoText: "Meeting with the team",
       peopleCount: 5,
-      day: "Wed",
-      date: "28",
+      day: "Tue",
+      date: "21",
       isCancelled: false,
       isError: false,
       meetingType: "Upcoming",
       month: "July",
+      isChangeMade: false,
     },
     {
       id: 2,
@@ -25,10 +26,11 @@ const Final = () => {
       peopleCount: 3,
       day: "Wed",
       date: "28",
-      isCancelled: false,
-      isError: false,
+      isCancelled: true,
+      isError: true,
       meetingType: "Upcoming",
       month: "July",
+      isChangeMade: true,
     },
     {
       id: 3,
@@ -42,6 +44,7 @@ const Final = () => {
       isError: false,
       meetingType: "Upcoming",
       month: "July",
+      isChangeMade: false,
     },
     {
       id: 4,
@@ -55,6 +58,7 @@ const Final = () => {
       isError: false,
       meetingType: "Upcoming",
       month: "June",
+      isChangeMade: false,
     },
     {
       id: 5,
@@ -68,6 +72,7 @@ const Final = () => {
       isError: false,
       meetingType: "Pending",
       month: "June",
+      isChangeMade: false,
     },
     {
       id: 6,
@@ -81,6 +86,7 @@ const Final = () => {
       isError: false,
       meetingType: "Pending",
       month: "June",
+      isChangeMade: false,
     },
     {
       id: 7,
@@ -94,6 +100,7 @@ const Final = () => {
       isError: false,
       meetingType: "Pending",
       month: "June",
+      isChangeMade: false,
     },
     {
       id: 8,
@@ -107,6 +114,7 @@ const Final = () => {
       isError: false,
       meetingType: "Pending",
       month: "June",
+      isChangeMade: false,
     },
     {
       id: 9,
@@ -120,6 +128,7 @@ const Final = () => {
       isError: false,
       meetingType: "Recurring",
       month: "June",
+      isChangeMade: false,
     },
     {
       id: 10,
@@ -133,6 +142,7 @@ const Final = () => {
       isError: false,
       meetingType: "Recurring",
       month: "June",
+      isChangeMade: false,
     },
     {
       id: 11,
@@ -146,6 +156,7 @@ const Final = () => {
       isError: false,
       meetingType: "Recurring",
       month: "June",
+      isChangeMade: false,
     },
     {
       id: 12,
@@ -159,6 +170,7 @@ const Final = () => {
       isError: false,
       meetingType: "Recurring",
       month: "June",
+      isChangeMade: false,
     },
     {
       id: 13,
@@ -172,6 +184,7 @@ const Final = () => {
       isError: false,
       meetingType: "Past",
       month: "June",
+      isChangeMade: false,
     },
   ]);
 
@@ -191,6 +204,8 @@ const Final = () => {
       return acc;
     }, {});
 
+  const hasData = Object.keys(groupedByMonth).length > 0;
+
   return (
     <div className="bg-white h-screen w-full flex flex-col px-8 py-2">
       <div className="w-full py-5">
@@ -209,14 +224,26 @@ const Final = () => {
         />
       </div>
       <div className="cardWrapper h-full w-full flex flex-col items-start gap-4 pt-10 overflow-y-auto">
-        {Object.keys(groupedByMonth).map((month) => (
-          <div key={month} className="month-section w-full">
-            <h3 className="text-xl font-semibold text-black mb-4">{month}</h3>
-            {groupedByMonth[month].map((data) => (
-              <Card key={data.id} data={data} />
-            ))}
+        {hasData ? (
+          Object.keys(groupedByMonth).map((month) => (
+            <div
+              key={month}
+              className="month-section w-full flex flex-col items-start gap-2"
+            >
+              <h3 className="text-xl font-semibold text-black mb-4">{month}</h3>
+              {groupedByMonth[month].map((data) => (
+                <Card key={data.id} data={data} />
+              ))}
+            </div>
+          ))
+        ) : (
+          <div className="w-full h-full flex flex-col text-gray-500 px-2">
+            <h3 className="text-xl font-medium">No events found</h3>
+            <p className="font-light">
+              Try selecting a different filter or check back later.
+            </p>
           </div>
-        ))}
+        )}
       </div>
     </div>
   );
