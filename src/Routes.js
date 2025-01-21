@@ -8,13 +8,14 @@ import MapCard from './Components/Map card/Final/FinalMap.jsx';
 import SwapFinal from './Components/Swap Animation/Card/Card.jsx';
 import MeetingModal from './Components/Meeting Modal/Final/Final.jsx'
 import BookingUI from './Components/Booking UI/Final/Final.jsx'
-
-// Internal Imports
-import Error from './Pages/Error';
 import Final from './Components/Onboarding/Final/Final';
 import Sidebar from './Components/Sidebar/Final/Sidebar';
 import ModernMenu from './Components/Modern Menu/Final/Final';
 import ModernFooter from './Components/Modern Footer/Final/Final';
+import ModernCarousel from './Components/Modern Carousel/Final/Final';
+
+// Internal Imports
+import Error from './Pages/Error';
 
 export const routes = [
 	{
@@ -105,12 +106,12 @@ export const routes = [
 		name: 'Booking UI',
 		component: BookingUI,
 	},
-	{
-		id: 16,
-		path: '/modern-carousel',
-		name: 'Modern Carousel',
-		component: ModernFooter,
-	},
+	// {
+	// 	id: 16,
+	// 	path: '/modern-carousel',
+	// 	name: 'Modern Carousel',
+	// 	component: ModernCarousel,
+	// },
 	{
 		id: 100,
 		path: '*',
