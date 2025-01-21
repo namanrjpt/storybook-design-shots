@@ -4,7 +4,6 @@ import { GoClockFill } from "react-icons/go";
 import { IoLocationSharp } from "react-icons/io5";
 import { Avatar, Dropdown } from "antd";
 import { LuChevronDown } from "react-icons/lu";
-import { SettingOutlined } from "@ant-design/icons";
 import { MdSend } from "react-icons/md";
 import { MdPersonAddAlt1 } from "react-icons/md";
 import { MdCancel } from "react-icons/md";
@@ -157,7 +156,7 @@ const Card = ({ data }) => {
         }}
         trigger={["click"]}
         overlayStyle={{
-          width: "250px", // Set the dropdown menu width
+          width: "250px",
         }}
       >
         <button
